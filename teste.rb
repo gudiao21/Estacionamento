@@ -1,7 +1,8 @@
 puts "Digite 1 para cadastrar entrada."
 puts "Digite 2 para cadastrar saída."
-puts "Digite 3 para mostrar movimentação do dia."
-puts "Digite 4 para sair."
+puts "Digite 3 para buscar placa."
+puts "Digite 4 para mostrar movimentação do dia."
+puts "Digite 5 para sair."
 
 # require 'time'
 
