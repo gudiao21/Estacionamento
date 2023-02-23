@@ -77,8 +77,8 @@ classe ControleVeiculo #Sempre no formato "Pascal Case".
 
         veiculo = Veiculo.busca_por_placa(placa)
         if veiculo.nil? #Se o veiculo não existir
-            veiculo = Veiculo.busca_por_placa
-            veiculo.placa = placa
+            veiculo = ControleVeiculo.incluir_placa(placa) #Linha 93
+            #veiculo.placa = placa
             print "Entre com o nome do carro: "
             veiculo.carro = gets.to_s.strip
             print "Entre com o nome do proprietário: "
@@ -87,10 +87,11 @@ classe ControleVeiculo #Sempre no formato "Pascal Case".
             veiculo.dono_do_carro = gets.to_s.strip
             print "Entre com a hora de entrada: "
             veiculo.hora_entrada = Time.parse(gets.chomp)
-            puts "Alguns minutos depois ....".upcase
-            sleep(2)
-            cadastrar_saida
         end
+    end
+
+    def self.incluir_placa(placa)
+        
     end
 
     def self.cadastrar_saida
