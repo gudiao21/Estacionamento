@@ -1,11 +1,41 @@
 require 'time'
+require 'byebug'
 
 #@placas = []
 
-class Estacionamento
+class Veiculo
     @placas = []
-    attr_accessor :placa, :carro, :nome, :pessoa
+    attr_accessor :placa, :carro, :nome, :pessoa #"pessoa" seria o dono do carro.
 
+    def self.busca_por_placa(placa)
+        veiculo_encontrado = nil
+        ControleVeiculo.placa.each do |veiculo|
+            if veiculo.placa == placa
+                veiculo_encontrado = veiculo
+                break
+            end
+        end
+            
+        veiculo_encontrado
+    end
+
+    def self.mostar
+        puts "Placa do carro é #{@placa}."
+        puts "O nome do carro é #{@nome}."
+        puts "O nome do proprietário é #{@pessoa}."
+        puts "A hora de entrada foi #{hora_entrada}."
+        if hora_saida == nil
+            puts 'A hora de saída ainda não foi registrada.'
+        else
+            puts "A hora de saída foi #{hora_saida}."
+        end   
+    end
+
+end
+
+classe ControleVeiculo
+    @@pessoa = []
+    SAIR_DO_SISTEMA = 5
     def self.menu
         puts "\nO que deseja fazer?\n\n"
         puts "Digite (1) para cadastrar entrada do veículo."
@@ -49,32 +79,10 @@ class Estacionamento
         hora_saida = Time.parse(gets.chomp)
     end
 
-    def self.busca_por_placa
-        colaborador_encontrado = nil
-        ControladorVacina.colaboradores.each do |colaborador|
-        if colaborador.placa == placa
-            colaborador_encontrado = colaborador
-            break
-        end
-    end
-
-    # colaborador_encontrado
-        end    
-            
-    end
-
-    def self.mostar
-        puts "Placa do carro é #{@placa}"
-        puts "O nome do carro é #{@nome}"
-        puts "O nome do proprietário é #{@}"
-    end
-
-
     def calcular_tempo_por_minuto
         minutos_estacionado = ((hora_saida - hora_entrada)/60).to_i
         tempo_total_estacionado = minutos_estacionado * 0.17
     end
-    
-end
 
-Estacionamento.cadastrar_entrada
+    Estacionamento.cadastrar_entrada
+end
