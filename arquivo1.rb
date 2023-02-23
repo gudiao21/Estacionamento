@@ -4,7 +4,7 @@ require 'byebug'
 #@placas = []
 
 class Veiculo
-    attr_accessor :placa, :carro, :nome_veiculo, :pessoa #"pessoa" seria o dono do carro.
+    attr_accessor :placa, :nome_veiculo, :dono_do_carro, :hora_entrada, :hora_saida #"dono_do_carro" seria o dono do carro.
 
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
@@ -21,7 +21,7 @@ class Veiculo
     def mostar #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
-        puts "O nome do proprietário é #{@pessoa}."
+        puts "O nome do proprietário é #{@dono_do_carro}."
         puts "A hora de entrada foi #{hora_entrada}."
         if hora_saida == nil
             puts 'A hora de saída ainda não foi registrada.'
@@ -34,11 +34,11 @@ end
 
 classe ControleVeiculo #Sempre no formato "Pascal Case".
     @@placas = []
-    #@@pessoas = []
+    #@@dono_do_carros = []
     SAIR_DO_SISTEMA = 5
     
-    # def self.pessoas
-    #     @@pessoas
+    # def self.dono_do_carros
+    #     @@dono_do_carros
     # end
 
     def self.placas
@@ -72,19 +72,25 @@ classe ControleVeiculo #Sempre no formato "Pascal Case".
 
     def self.cadastrar_entrada
         print "Por favor, entre com a placa do veículo: "
-        @placa = gets.strip
-        @placas << @placa
-        print "Entre com o nome do carro: "
-        @carro = gets.to_s.strip
-        print "Entre com o nome do proprietário: "
-        @nome = gets.to_s.strip.chomp
-        puts = "Entre com o nome do proprietário do veículo: "
-        @pessoa = gets.to_s.strip
-        print "Entre com a hora de entrada: "
-        hora_entrada = Time.parse(gets.chomp)
-        puts "Alguns minutos depois ....".upcase
-        sleep(2)
-        cadastrar_saida
+        placa = gets.strip
+        #@placas << @placa
+
+        veiculo = Veiculo.busca_por_placa(placa)
+        if veiculo.nil? #Se o veiculo não existir
+            veiculo = Veiculo.busca_por_placa
+            veiculo.placa = placa
+            print "Entre com o nome do carro: "
+            veiculo.carro = gets.to_s.strip
+            print "Entre com o nome do proprietário: "
+            veiculo.nome_veiculo = gets.to_s.strip.chomp
+            puts = "Entre com o nome do proprietário do veículo: "
+            veiculo.dono_do_carro = gets.to_s.strip
+            print "Entre com a hora de entrada: "
+            veiculo.hora_entrada = Time.parse(gets.chomp)
+            puts "Alguns minutos depois ....".upcase
+            sleep(2)
+            cadastrar_saida
+        end
     end
 
     def self.cadastrar_saida
