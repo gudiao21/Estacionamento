@@ -4,8 +4,7 @@ require 'byebug'
 #@placas = []
 
 class Veiculo
-    @placas = []
-    attr_accessor :placa, :carro, :nome, :pessoa #"pessoa" seria o dono do carro.
+    attr_accessor :placa, :carro, :nome_veiculo, :pessoa #"pessoa" seria o dono do carro.
 
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
@@ -19,23 +18,33 @@ class Veiculo
         veiculo_encontrado
     end
 
-    def self.mostar
+    def mostar #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
-        puts "O nome do carro é #{@nome}."
+        puts "O nome do carro é #{@nome_veiculo}."
         puts "O nome do proprietário é #{@pessoa}."
         puts "A hora de entrada foi #{hora_entrada}."
         if hora_saida == nil
             puts 'A hora de saída ainda não foi registrada.'
         else
             puts "A hora de saída foi #{hora_saida}."
-        end   
+        end
     end
 
 end
 
-classe ControleVeiculo
-    @@pessoa = []
+classe ControleVeiculo #Sempre no formato "Pascal Case".
+    @@placas = []
+    #@@pessoas = []
     SAIR_DO_SISTEMA = 5
+    
+    # def self.pessoas
+    #     @@pessoas
+    # end
+
+    def self.placas
+        @@placas = []
+    end
+
     def self.menu
         puts "\nO que deseja fazer?\n\n"
         puts "Digite (1) para cadastrar entrada do veículo."
@@ -43,23 +52,27 @@ classe ControleVeiculo
         puts "Digite (3) para buscar placa."
         puts "Digite (4) para mostrar movimentação do dia."
         puts "Digite (5) para sair."
+        ControleVeiculo.captura_item_menu
     end
 
-    def captura_item_menu
+    def self.captura_item_menu
         opcao = gets.to_i
+        case opcao
         when 1
-            Estacionamento.cadastrar_entrada
+            ControleVeiculo.cadastrar_entrada
         when 2
-            Estacionamento.cadastrar_saida
+            ControleVeiculo.cadastrar_saida
         when 3
-            Estacionamento.busca_por_placa
-        when 4        
+            ControleVeiculo.busca_por_placa
+        when 4
+            
+        end
 
-    end    
+    end
 
     def self.cadastrar_entrada
         print "Por favor, entre com a placa do veículo: "
-        @placa = gets.to_s.strip
+        @placa = gets.strip
         @placas << @placa
         print "Entre com o nome do carro: "
         @carro = gets.to_s.strip
@@ -84,5 +97,5 @@ classe ControleVeiculo
         tempo_total_estacionado = minutos_estacionado * 0.17
     end
 
-    Estacionamento.cadastrar_entrada
+    #Estacionamento.cadastrar_entrada
 end
