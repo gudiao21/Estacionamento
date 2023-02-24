@@ -9,8 +9,8 @@ class Veiculo
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
         @@placas.each do |veiculo|
-            if veiculo.placa == placa
-                veiculo_encontrado = veiculo
+            if veiculo == placa
+                veiculo_encontrado = veiculo.placa
                 break
             end
         end
@@ -18,7 +18,7 @@ class Veiculo
         veiculo_encontrado
     end
 
-    def mostar #Método para cada veículo.
+    def mostrar #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
         puts "O nome do proprietário é #{@dono_do_carro}."
@@ -30,15 +30,10 @@ class Veiculo
 end
 
 class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
-    @@placas = []
     SAIR_DO_SISTEMA = 5
     #@veiculo = Veiculo.new
     
-    def self.placas
-        @@placas = []
-    end
-
-    def self.menu
+        def self.menu
         puts "\nO que deseja fazer?\n\n"
         puts "Digite (1) para cadastrar entrada do veículo."
         puts "Digite (2) para cadastrar saída do veículo."
@@ -86,24 +81,23 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     def self.cadastrar_saida
         veiculo = Veiculo.new
         print "Entre com a placa do veículo: "
-        placa = gets.to_s.strip
-        veiculo = Veiculo.busca_por_placa(placa)
-        #veiculo.busca_por_placa(placa)
+        veiculo.placa = gets.to_s.strip
+        #veiculo = Veiculo.busca_por_placa(placa)
+        veiculo.busca_por_placa(placa)
         if veiculo == nil
             puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
         else
-            veiculo.hora_de_entrada = hora_de_entrada
             print "Entre com a hora da saída: "
-            @hora_saida = Time.parse(gets.chomp)
+            veiculo.hora_saida = Time.parse(gets.chomp)
             minutos_estacionado = ((@hora_saida - @veiculo.hora_entrada)/60).to_i
             valor_total_a_pagar = minutos_estacionado * 0.17
             puts "O tempo total gasto no estacionamento foi #{minutos_estacionado}"
             puts "O valor total a pagar foi de #{valor_total_a_pagar}"
-            ControleVeiculo.listar_colaboradores
+            ControleVeiculo.listar_veiculos
         end    
     end
 
-    def self.listar_colaboradores
+    def self.listar_veiculos
         system "clear"
         
         if ControleVeiculo.placas.length == 0
@@ -117,7 +111,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         veiculo.mostrar
         end
         ControleVeiculo.pausa
-    end    
+    end
       
     def self.pausa
         sleep(3)
