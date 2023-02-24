@@ -5,6 +5,7 @@ require 'time'
 
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
+    
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
         ControleVeiculo.placa.each do |veiculo|
@@ -31,7 +32,7 @@ end
 class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     @@placas = []
     SAIR_DO_SISTEMA = 5
-    @veiculo = Veiculo.new
+    #@veiculo = Veiculo.new
     
     def self.placas
         @@placas = []
@@ -76,25 +77,30 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculo.placas << @placa
         #return @placa #Depois de cadastrar, motrar o mesmo na tela.
         print "Entre com a hora de entrada: "
-        @veiculo.hora_entrada = Time.parse(gets.chomp)
+        veiculo.hora_entrada = Time.parse(gets.chomp)
         puts "======================================"
         #veiculo.mostrar
         #end
     end
 
     def self.cadastrar_saida
-        if @veiculo.hora_entrada == nil
-            puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
-
+        veiculo = Veiculo.new
         print "Entre com a placa do veículo: "
-        @placa = gets.to_s.strip
-        print "Entre com a hora da saída: "
-        @hora_saida = Time.parse(gets.chomp)
-        minutos_estacionado = ((@hora_saida - @veiculo.hora_entrada)/60).to_i
-        valor_total_a_pagar = minutos_estacionado * 0.17
-        puts "O tempo total gasto no estacionamento foi #{minutos_estacionado}"
-        puts "O valor total a pagar foi de #{valor_total_a_pagar}"
-        ControleVeiculo.listar_colaboradores
+        placa = gets.to_s.strip
+        veiculo.placa = placa
+        veiculo.busca_por_placa(placa)
+        if veiculo.placa == nil
+            puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
+        else
+            veiculo.hora_de_entrada = hora_de_entrada
+            print "Entre com a hora da saída: "
+            @hora_saida = Time.parse(gets.chomp)
+            minutos_estacionado = ((@hora_saida - @veiculo.hora_entrada)/60).to_i
+            valor_total_a_pagar = minutos_estacionado * 0.17
+            puts "O tempo total gasto no estacionamento foi #{minutos_estacionado}"
+            puts "O valor total a pagar foi de #{valor_total_a_pagar}"
+            ControleVeiculo.listar_colaboradores
+        end    
     end
 
     def self.listar_colaboradores
