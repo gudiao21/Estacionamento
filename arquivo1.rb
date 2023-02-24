@@ -1,11 +1,10 @@
 require 'time'
-require 'byebug'
+#require 'byebug'
 
 #@placas = []
 
 class Veiculo
-    attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida #"dono_do_carro" seria o dono do carro.
-
+    attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
         ControleVeiculo.placa.each do |veiculo|
@@ -23,24 +22,17 @@ class Veiculo
         puts "O nome do carro é #{@nome_veiculo}."
         puts "O nome do proprietário é #{@dono_do_carro}."
         puts "A hora de entrada foi #{hora_entrada}."
-        if hora_saida == nil
-            puts 'A hora de saída ainda não foi registrada.'
-        else
-            puts "A hora de saída foi #{hora_saida}."
-        end
+        puts "A hora de saída foi #{hora_saida}."
+        
     end
 
 end
 
-classe ControleVeiculo #Sempre no formato "Pascal Case".
+class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     @@placas = []
-    #@@dono_do_carros = []
     SAIR_DO_SISTEMA = 5
+    @veiculo = Veiculo.new
     
-    # def self.dono_do_carros
-    #     @@dono_do_carros
-    # end
-
     def self.placas
         @@placas = []
     end
@@ -65,45 +57,73 @@ classe ControleVeiculo #Sempre no formato "Pascal Case".
         when 3
             ControleVeiculo.busca_por_placa
         when 4
-            
+
+        when SAIR_DO_SISTEMA
+            SAIR_DO_SISTEMA
         end
 
     end
 
     def self.cadastrar_entrada
+        veiculo = Veiculo.new
         print "Digite a placa do veiculo: "
-        placa = gets.strip
-
-        #veiculo = Veiculo.busca_por_placa(placa)
-        #if veiculo.nil? #Se o veiculo não existir
-        veiculo = ControleVeiculo.incluir_placa(placa) #Linha
-        #veiculo.mostrar
-        print "Entre com a hora de entrada: "
-        veiculo.hora_entrada = Time.parse(gets.chomp)
-        #end
-    end
-
-    def self.incluir_placa(placa) #linha
-        veiculo.placa = placa
+        @placa = gets.strip
         print "Entre com o nome do veiculo: "
         veiculo.nome_veiculo = gets.to_s.strip
         print "Entre com o nome do proprietário: "
         veiculo.dono_do_veiculo = gets.to_s.strip.chomp
 
-        ControleVeiculo.placas << placa
+        ControleVeiculo.placas << @placa
+        #return @placa #Depois de cadastrar, motrar o mesmo na tela.
+        print "Entre com a hora de entrada: "
+        @veiculo.hora_entrada = Time.parse(gets.chomp)
         puts "======================================"
-        return placa #Depois de cadastrar, motrar o mesmo na tela.
+        #veiculo.mostrar
+        #end
     end
 
     def self.cadastrar_saida
+        if @veiculo.hora_entrada == nil
+            puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
+
+        print "Entre com a placa do veículo: "
+        @placa = gets.to_s.strip
         print "Entre com a hora da saída: "
-        hora_saida = Time.parse(gets.chomp)
+        @hora_saida = Time.parse(gets.chomp)
+        minutos_estacionado = ((@hora_saida - @veiculo.hora_entrada)/60).to_i
+        valor_total_a_pagar = minutos_estacionado * 0.17
+        puts "O tempo total gasto no estacionamento foi #{minutos_estacionado}"
+        puts "O valor total a pagar foi de #{valor_total_a_pagar}"
+        ControleVeiculo.listar_colaboradores
     end
 
-    def calcular_tempo_por_minuto
-        minutos_estacionado = ((hora_saida - hora_entrada)/60).to_i
-        tempo_total_estacionado = minutos_estacionado * 0.17
+    def self.listar_colaboradores
+        system "clear"
+        
+        if ControleVeiculo.placas.length == 0
+          puts "Não temos nenhuma placa em nossa base de dados ainda."
+          ControladorVacina.pausa
+          return
+        end
+        
+        ControleVeiculo.placas.each do |placa|
+        puts "======================================="
+        veiculo.mostrar
+        end
+        ControleVeiculo.pausa
+    end    
+      
+    def self.pausa
+        sleep(3)
+        system "clear"
     end
-
-    #Estacionamento.cadastrar_entrada
+    
+    def self.init
+        while(true)
+          opcao = ControleVeiculo.menu
+          break if opcao == SAIR_DO_SISTEMA
+        end
+    end
 end
+
+ControleVeiculo.init
