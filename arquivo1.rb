@@ -1,16 +1,19 @@
 require 'time'
 #require 'byebug'
 
-@@placas = []
-
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
+    @@placas = []
     
+    def self.placas
+        @@placas
+    end
+
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
         @@placas.each do |veiculo|
-            if veiculo == placa
-                veiculo_encontrado = veiculo.placa
+            if @placa == placa
+                veiculo_encontrado = veiculo
                 break
             end
         end
@@ -24,7 +27,6 @@ class Veiculo
         puts "O nome do proprietário é #{@dono_do_carro}."
         puts "A hora de entrada foi #{hora_entrada}."
         puts "A hora de saída foi #{hora_saida}."
-        
     end
 
 end
@@ -51,7 +53,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         when 2
             ControleVeiculo.cadastrar_saida
         when 3
-            ControleVeiculo.busca_por_placa
+            Veiculo.busca_por_placa
         when 4
 
         when SAIR_DO_SISTEMA
@@ -61,7 +63,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_entrada
-        veiculo = Veiculo.new
+        veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
         veiculo.placa = gets.strip
         print "Entre com o nome do veiculo: "
@@ -69,7 +71,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         print "Entre com o nome do proprietário: "
         veiculo.dono_do_veiculo = gets.to_s.strip.chomp
 
-        ControleVeiculo.placas << veiculo.placa
+        Veiculo.placas << veiculo.placa
         #return @placa #Depois de cadastrar, motrar o mesmo na tela.
         print "Entre com a hora de entrada: "
         veiculo.hora_entrada = Time.parse(gets.chomp)
@@ -82,14 +84,13 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         veiculo = Veiculo.new
         print "Entre com a placa do veículo: "
         veiculo.placa = gets.to_s.strip
-        #veiculo = Veiculo.busca_por_placa(placa)
-        veiculo.busca_por_placa(placa)
+        Veiculo.busca_por_placa(veiculo.placa)#"Veiculo.buscar_por_placa" porque se refere a um método de outra classe e não a uma propriedade que está em um método em outra classe!
         if veiculo == nil
             puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
         else
             print "Entre com a hora da saída: "
             veiculo.hora_saida = Time.parse(gets.chomp)
-            minutos_estacionado = ((@hora_saida - @veiculo.hora_entrada)/60).to_i
+            minutos_estacionado = ((veiculo.hora_saida - veiculo.hora_entrada)/60).to_i
             valor_total_a_pagar = minutos_estacionado * 0.17
             puts "O tempo total gasto no estacionamento foi #{minutos_estacionado}"
             puts "O valor total a pagar foi de #{valor_total_a_pagar}"
