@@ -1,14 +1,14 @@
 require 'time'
 #require 'byebug'
 
-#@placas = []
+@@placas = []
 
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
     
     def self.busca_por_placa(placa)
         veiculo_encontrado = nil
-        ControleVeiculo.placa.each do |veiculo|
+        @@placas.each do |veiculo|
             if veiculo.placa == placa
                 veiculo_encontrado = veiculo
                 break
@@ -68,13 +68,13 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     def self.cadastrar_entrada
         veiculo = Veiculo.new
         print "Digite a placa do veiculo: "
-        @placa = gets.strip
+        veiculo.placa = gets.strip
         print "Entre com o nome do veiculo: "
         veiculo.nome_veiculo = gets.to_s.strip
         print "Entre com o nome do proprietário: "
         veiculo.dono_do_veiculo = gets.to_s.strip.chomp
 
-        ControleVeiculo.placas << @placa
+        ControleVeiculo.placas << veiculo.placa
         #return @placa #Depois de cadastrar, motrar o mesmo na tela.
         print "Entre com a hora de entrada: "
         veiculo.hora_entrada = Time.parse(gets.chomp)
@@ -87,9 +87,9 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         veiculo = Veiculo.new
         print "Entre com a placa do veículo: "
         placa = gets.to_s.strip
-        veiculo.placa = placa
-        veiculo.busca_por_placa(placa)
-        if veiculo.placa == nil
+        veiculo = Veiculo.busca_por_placa(placa)
+        #veiculo.busca_por_placa(placa)
+        if veiculo == nil
             puts "Esse veículo não deu entrada aqui no Estacionamento ainda!"
         else
             veiculo.hora_de_entrada = hora_de_entrada
