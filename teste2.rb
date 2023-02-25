@@ -4,24 +4,24 @@ require 'time'
 #debugger
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
-    @@placas = []
+    # @@placas = []
 
-    def self.placas
-        @@placas
-    end
+    # def self.placas
+    #     @@placas
+    # end
 
     def self.busca_por_placa(placa)
         #ControladorVacina.colaboradores.find{ |colaborador| colaborador.cpf == cpf }
     
-        colaborador_encontrado = nil
-        ControladorVacina.colaboradores.each do |colaborador|
-          if colaborador.cpf == cpf
-            colaborador_encontrado = colaborador
+        veiculo_encontrado = nil
+        ControleVeiculo.placas.each do |veiculo|
+          if @placa == placa
+            colaborador_encontrado = veiculo
             break
           end
         end
     
-        colaborador_encontrado
+        veiculo_encontrado
     end
 
     def mostrar #Método para cada veículo.
@@ -36,7 +36,11 @@ end
 
 class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
-    @@placas = Veiculo.placas
+    @@placas = []
+
+    def self.placas
+        @@placas
+    end
         
     def self.menu
         puts "\nO que deseja fazer?\n\n"
@@ -56,7 +60,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         when 2
             #ControleVeiculo.cadastrar_saida
         when 3
-            ControleVeiculo.busca_veiculo
+            ControleVeiculo.buscar_veiculo
         when 4
 
         when SAIR_DO_SISTEMA
@@ -80,9 +84,9 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.buscar_veiculo
-        puts "\nDigite o CPF do colaborador? \n\n"
-        cpf = gets.strip
-        veiculo = Veiculo.busca_por_cpf(cpf)
+        print "\nDigite a placa do veículo? "
+        placa = gets.strip
+        veiculo = Veiculo.busca_por_placa(placa)
     end    
 
     def self.init
