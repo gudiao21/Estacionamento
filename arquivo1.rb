@@ -15,7 +15,13 @@ class Veiculo
     end
 
     def self.placas
-        @@placas
+        @@placas  # def initialize(placa, hora_entrada, hora_saida, nome_veiculo, dono_do_carro) #Contrutor
+        #     @placa = placa
+        #     @hora_entrada = hora_entrada
+        #     @hora_saida = hora_saida
+        #     @nome_veiculo = nome_veiculo
+        #     @dono_do_veiculo = dono_do_veiculo
+        # end
     end
 
     def self.busca_por_placa(placa)
