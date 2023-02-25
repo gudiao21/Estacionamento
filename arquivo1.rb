@@ -1,10 +1,16 @@
 require 'time'
-#require 'byebug'
+require 'byebug'
 
+#debugger
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
     @@placas = []
     
+    def initialize #Contrutor
+        @hora_entrada = []
+        @hora_saida = []
+    end
+
     def self.placas
         @@placas
     end
@@ -18,7 +24,7 @@ class Veiculo
             end
         end
             
-        veiculo_encontrado
+        return veiculo_encontrado
     end
 
     def mostrar #Método para cada veículo.
@@ -66,18 +72,16 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
         veiculo.placa = gets.strip
+        Veiculo.placas << veiculo.placa
         print "Entre com o nome do veiculo: "
         veiculo.nome_veiculo = gets.to_s.strip
         print "Entre com o nome do proprietário: "
         veiculo.dono_do_veiculo = gets.to_s.strip.chomp
 
-        Veiculo.placas << veiculo.placa
         #return @placa #Depois de cadastrar, motrar o mesmo na tela.
         print "Entre com a hora de entrada: "
         veiculo.hora_entrada = Time.parse(gets.chomp)
         puts "======================================"
-        #veiculo.mostrar
-        #end
     end
 
     def self.cadastrar_saida
