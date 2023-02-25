@@ -6,9 +6,12 @@ class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
     @@placas = []
     
-    def initialize #Contrutor
-        @hora_entrada = []
-        @hora_saida = []
+    def initialize(placa, hora_entrada, hora_saida) #Contrutor
+        @placa = placa
+        @hora_entrada = hora_entrada
+        @hora_saida = hora_saida
+        @nome_veiculo = nome_veiculo
+        @dono_do_veiculo = dono_do_veiculo
     end
 
     def self.placas
