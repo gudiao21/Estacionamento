@@ -5,7 +5,7 @@ require 'time'
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    def mostrar #Método para cada veículo.
+    def mostrar(placa) #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
         puts "O nome do proprietário é #{@dono_do_carro}."
@@ -15,7 +15,7 @@ class Veiculo
 
 end
 
-class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
+class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
     @@placas = []
 
@@ -30,18 +30,18 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         puts "Digite (3) para buscar placa."
         puts "Digite (4) para mostrar movimentação do dia."
         puts "Digite (5) para sair."
-        ControleVeiculo.captura_item_menu
+        ControleVeiculos.captura_item_menu
     end
 
     def self.captura_item_menu
         opcao = gets.to_i
         case opcao
         when 1
-            ControleVeiculo.cadastrar_entrada
+            ControleVeiculos.cadastrar_entrada
         when 2
             #ControleVeiculo.cadastrar_saida
         when 3
-            ControleVeiculo.buscar_veiculo
+            ControleVeiculos.buscar_veiculo
         when 4
 
         when SAIR_DO_SISTEMA
@@ -53,7 +53,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
         placa = gets.strip
-        @@placas << placa
+        ControleVeiculos.placas << placa
         print "Entre com o nome do veiculo: "
         veiculo.nome_veiculo = gets.to_s.strip
         print "Entre com o nome do proprietário: "
@@ -67,50 +67,44 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     def self.buscar_veiculo
         print "\nDigite a placa do veículo? "
         placa = gets.strip
-        veiculo = Veiculo.new
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         veiculo_encontrado = nil
-        ControleVeiculo.placas.each do |veiculo|
-            if @@placas == placa
-                veiculo_encontrado = veiculo
+        ControleVeiculos.placas.each do |v|
+            if ControleVeiculos.placas == placa
+                veiculo_encontrado = v
+                puts "O veículo de placa #{veiculo_encontrado} foi encontrado: "
+                veiculo = Veiculo.new
+                veiculo.mostrar(placa)
                 #break
-            end
-        end
+            else
+                puts "Veículo de placa #{placa} não encontrado."
+                puts "Deseja cadastrar a placa? (S/N)"
+                opcao = gets.strip.upcase
+                if opcao == "S"
+                    ControleVeiculo.cadastrar_entrada(placa)
+                    #puts "====================================="
+                    #veiculo.mostrar
+                    #ControleVacina.pausa
+                end
+            end  
         
-        puts "O veículo de placa #{veiculo_encontrado} foi encontrado: "
-        veiculo.mostar
-    
-        #Veiculo.busca_por_placa(placa)
-
-        system "clear"
-        unless veiculo.nil? #Se o veículo(placa) for != de nulo ...
-            veiculo.mostrar
-            ControleVeiculo.pausa
-        else
-            puts "Veículo de placa #{placa} não encontrado."
-            puts "Deseja cadastrar a placa? (S/N)"
-            opcao = gets.strip.upcase
-            if opcao == "S"
-                ControleVeiculo.cadastrar_entrada(placa)
-                #puts "====================================="
-                #veiculo.mostrar
-                #ControleVacina.pausa
-            end   
-        end    
+        end
     end
 
-    def self.pausa
+        #Veiculo.busca_por_placa(placa)
+
+     def self.pausa
         sleep(3)
         system "clear"
-    end    
+    end
     
     def self.init
         while(true)
-          opcao = ControleVeiculo.menu
+          opcao = ControleVeiculos.menu
           break if opcao == SAIR_DO_SISTEMA
         end
     end
 
 end
 
-ControleVeiculo.init
+ControleVeiculos.init
