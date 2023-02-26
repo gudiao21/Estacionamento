@@ -73,9 +73,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             if ControleVeiculos.placas == placa
                 veiculo_encontrado = v
                 puts "O veículo de placa #{veiculo_encontrado} foi encontrado: "
-                veiculo = Veiculo.new
-                veiculo.mostrar(placa)
-                #break
+                veiculo = Veiculo.new(placa)
+                veiculo.mostrar
             else
                 puts "Veículo de placa #{placa} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
