@@ -4,12 +4,7 @@ require 'time'
 #debugger
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
-    # @@placas = []
-
-    # def self.placas
-    #     @@placas
-    # end
-
+ 
     def self.busca_por_placa(placa)
         #ControladorVacina.colaboradores.find{ |colaborador| colaborador.cpf == cpf }
     
@@ -68,7 +63,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         end
     end    
         
-    def self.cadastrar_entrada
+    def self.cadastrar_entrada(placa)
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
         placa = gets.strip
@@ -86,9 +81,31 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
     def self.buscar_veiculo
         print "\nDigite a placa do veículo? "
         placa = gets.strip
-        veiculo = Veiculo.busca_por_placa(placa)
-    end    
+        veiculo = Veiculo.new
+        Veiculo.busca_por_placa(placa)
 
+        system "clear"
+        unless veiculo.nil? #Se o veículo(placa) for != de nulo ...
+            veiculo.mostrar
+            ControleVeiculo.pausa
+        else
+            puts "Veículo de placa #{placa} não encontrado."
+            puts "Deseja cadastrar a placa? (S/N)"
+            opcao = gets.strip.upcase
+            if opcao == "S"
+                ControleVeiculo.cadastrar_entrada(placa)
+                #puts "====================================="
+                #veiculo.mostrar
+                #ControleVacina.pausa
+            end   
+        end    
+    end
+
+    def self.pausa
+        sleep(3)
+        system "clear"
+    end    
+    
     def self.init
         while(true)
           opcao = ControleVeiculo.menu
