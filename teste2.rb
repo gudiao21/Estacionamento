@@ -5,20 +5,6 @@ require 'time'
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    def self.busca_por_placa(placa)
-        #ControladorVacina.colaboradores.find{ |colaborador| colaborador.cpf == cpf }
-    
-        veiculo_encontrado = nil
-        ControleVeiculo.placas.each do |veiculo|
-          if @placa == placa
-            colaborador_encontrado = veiculo
-            break
-          end
-        end
-    
-        veiculo_encontrado
-    end
-
     def mostrar #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
@@ -63,7 +49,7 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         end
     end    
         
-    def self.cadastrar_entrada(placa)
+    def self.cadastrar_entrada()
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
         placa = gets.strip
@@ -82,7 +68,19 @@ class ControleVeiculo #Sempre no padrão de codificação "Pascal Case".
         print "\nDigite a placa do veículo? "
         placa = gets.strip
         veiculo = Veiculo.new
-        Veiculo.busca_por_placa(placa)
+        #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
+        veiculo_encontrado = nil
+        ControleVeiculo.placas.each do |veiculo|
+            if @@placas == placa
+                veiculo_encontrado = veiculo
+                #break
+            end
+        end
+        
+        puts "O veículo de placa #{veiculo_encontrado} foi encontrado: "
+        veiculo.mostar
+    
+        #Veiculo.busca_por_placa(placa)
 
         system "clear"
         unless veiculo.nil? #Se o veículo(placa) for != de nulo ...
