@@ -5,12 +5,12 @@ require 'byebug'
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    def mostrar(placa) #Método para cada veículo.
+    def mostrar#(placa) #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
         puts "O nome do proprietário é #{@dono_do_carro}."
-        puts "A hora de entrada foi #{hora_entrada}."
-        puts "A hora de saída foi #{hora_saida}."
+        puts "A hora de entrada foi #{@hora_entrada}."
+        puts "A hora de saída foi #{@hora_saida}."
     end
 
 end
@@ -76,7 +76,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 veiculo_encontrado = v
                 puts "O veículo de placa #{veiculo_encontrado} foi encontrado: \n\n"
                 veiculo = Veiculo.new
-                veiculo.mostrar(placa)
+                veiculo.placa = placa
+                veiculo.mostrar#(placa)
             else
                 puts "Veículo de placa #{placa} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
