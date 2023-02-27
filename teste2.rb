@@ -21,7 +21,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     @@veiculos = {}
 
     def self.veiculos
-        @@placas
+        @@veiculos
     end
         
     def self.menu
@@ -54,15 +54,22 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     def self.cadastrar_entrada()
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
-        placa = gets.strip
-        ControleVeiculos.veiculos << placa
-        print "Entre com o nome do veiculo: "
-        veiculo.nome_veiculo = gets.to_s.strip
-        print "Entre com o nome do proprietário: "
-        veiculo.dono_do_veiculo = gets.to_s.strip.chomp
-        print "Entre com a hora de entrada: "
-        veiculo.hora_entrada = Time.parse(gets.chomp)
-        veiculo.hora_saida = nil
+        veiculos[:placa] = gets.strip
+        print "Digite o nome do veículo: "
+        veiculos[:nome_veiculo] = gets.chomp
+        print "Digite o nome do proprietário do veículo: "
+        veiculos[:dono_do_carro] = gets.to_s.chomp.strip
+        
+       
+        #ControleVeiculos.veiculos << placa
+        # print "Entre com o nome do veiculo: "
+        # veiculo.nome_veiculo = gets.to_s.strip
+        # print "Entre com o nome do proprietário: "
+        # veiculo.dono_do_veiculo = gets.to_s.strip.chomp
+        # print "Entre com a hora de entrada: "
+        # veiculo.hora_entrada = Time.parse(gets.chomp)
+        # veiculo.hora_saida = nil
+        puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
     end
 
