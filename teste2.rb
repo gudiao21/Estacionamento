@@ -1,5 +1,5 @@
 require 'time'
-#require 'byebug'
+require 'byebug'
 
 #debugger
 class Veiculo
@@ -30,6 +30,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "Digite (3) para buscar placa."
         puts "Digite (4) para mostrar movimentação do dia."
         puts "Digite (5) para sair."
+        puts "====================================================="
         ControleVeiculos.captura_item_menu
     end
 
@@ -70,11 +71,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         veiculo_encontrado = nil
         ControleVeiculos.placas.each do |v|
-            if ControleVeiculos.placas == placa
+            #debugger
+            if v == placa
                 veiculo_encontrado = v
-                puts "O veículo de placa #{veiculo_encontrado} foi encontrado: "
-                veiculo = Veiculo.new(placa)
-                veiculo.mostrar
+                puts "O veículo de placa #{veiculo_encontrado} foi encontrado: \n\n"
+                veiculo = Veiculo.new
+                veiculo.mostrar(placa)
             else
                 puts "Veículo de placa #{placa} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
