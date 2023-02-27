@@ -58,17 +58,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite o nome do veículo: "
         veiculos[:nome_veiculo] = gets.chomp
         print "Digite o nome do proprietário do veículo: "
-        veiculos[:dono_do_carro] = gets.to_s.chomp.strip
-        
-       
-        #ControleVeiculos.veiculos << placa
-        # print "Entre com o nome do veiculo: "
-        # veiculo.nome_veiculo = gets.to_s.strip
-        # print "Entre com o nome do proprietário: "
-        # veiculo.dono_do_veiculo = gets.to_s.strip.chomp
-        # print "Entre com a hora de entrada: "
-        # veiculo.hora_entrada = Time.parse(gets.chomp)
-        # veiculo.hora_saida = nil
+        veiculos[:dono_do_carro] = gets.to_s.strip
+        print "Digite a hora de entrada do veículo: "
+        veiculos[:hora_entrada] = Time.parse(gets.chomp)
         puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
     end
@@ -78,13 +70,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa = gets.strip
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         veiculo_encontrado = nil
-        ControleVeiculos.placas.each do |v|
-            #debugger
+        ControleVeiculos.veiculos.each do |v|
+            debugger
             if v == placa
-                veiculo_encontrado = v
-                puts "O veículo de placa #{veiculo_encontrado} foi encontrado: \n\n"
+                puts "O veículo de placa #{v} foi encontrado: \n\n"
                 veiculo = Veiculo.new
                 veiculo.placa = placa
+                veiculo.nome_veiculo = nome_veiculo
                 veiculo.mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida)
             else
                 puts "Veículo de placa #{placa} não encontrado."
