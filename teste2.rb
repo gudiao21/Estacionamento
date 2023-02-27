@@ -67,15 +67,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
     def self.buscar_veiculo
         print "\nDigite a placa do veículo? "
-        placa = gets.strip
+        tag = gets.strip
+        
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         veiculo_encontrado = nil
         ControleVeiculos.veiculos.each do |v|
             debugger
-            if v == placa
+            if veiculos.placa == tag
                 puts "O veículo de placa #{v} foi encontrado: \n\n"
                 veiculo = Veiculo.new
-                veiculo.placa = placa
+                #veiculo.placa = tag
                 veiculo.nome_veiculo = nome_veiculo
                 veiculo.mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida)
             else
