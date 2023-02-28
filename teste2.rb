@@ -58,7 +58,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite o nome do veículo: "
         veiculos[:nome_veiculo] = gets.chomp
         print "Digite o nome do proprietário do veículo: "
-        veiculos[:dono_do_carro] = gets.to_s.strip
+        veiculos[:dono_do_carro] = gets.to_s
         print "Digite a hora de entrada do veículo: "
         veiculos[:hora_entrada] = Time.parse(gets.chomp)
         puts "Veiculo Cadastrado com sucesso."
@@ -67,18 +67,24 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
     def self.buscar_veiculo
         print "\nDigite a placa do veículo? "
-        tag = gets.strip
+        placa_procurada = gets.strip
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
-        veiculo_encontrado = nil
-        ControleVeiculos.veiculos.each do |v|
-            debugger
-            if veiculos.placa == tag
-                puts "O veículo de placa #{v} foi encontrado: \n\n"
+        ControleVeiculos.veiculos.each do |placa, tag|
+            #debugger
+            if tag == placa_procurada
+                puts "O veículo de placa #{tag} foi encontrado: \n\n"
                 veiculo = Veiculo.new
-                #veiculo.placa = tag
-                veiculo.nome_veiculo = nome_veiculo
-                veiculo.mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida)
+                veiculo.placa = tag
+                veiculo.nome_veiculo = veiculos[:nome_veiculo]
+                veiculo.dono_do_veiculo = veiculos[:dono_do_carro]
+                veiculo.hora_entrada = veiculos[:hora_entrada]
+                veiculo.hora_saida = veiculos[:hora_saida]
+                #veiculo.nome_veiculo = nome_veiculo
+                veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida)
+                puts "==========================================================="
+                #ControleVeiculos.pausa
+                break
             else
                 puts "Veículo de placa #{placa} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
