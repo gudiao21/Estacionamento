@@ -1,20 +1,20 @@
 #Exemplar de código mostra como chamar um método dentro de uma classe, quando se está em um outro método dentro de outra diferente classe:
 
-class MinhaClasse
-    def meu_metodo
-      puts "Olá do meu método!"
-    end
-end
+# class MinhaClasse
+#     def meu_metodo
+#       puts "Olá do meu método!"
+#     end
+# end
 
-class OutraClasse
-    def chamar_metodo_da_outra_classe
-      instancia_da_minha_classe = MinhaClasse.new
-      instancia_da_minha_classe.meu_metodo
-    end
-end
+# class OutraClasse
+#     def chamar_metodo_da_outra_classe
+#       instancia_da_minha_classe = MinhaClasse.new
+#       instancia_da_minha_classe.meu_metodo
+#     end
+# end
 
-outra_classe = OutraClasse.new
-outra_classe.chamar_metodo_da_outra_classe
+# outra_classe = OutraClasse.new
+# outra_classe.chamar_metodo_da_outra_classe
 
 #============================================================
 
@@ -25,10 +25,10 @@ require 'byebug'
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    def mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida) #Método para cada veículo.
+    def mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
-        puts "O nome do proprietário é #{@dono_do_carro}."
+        puts "O nome do proprietário é #{@dono_do_veiculo}."
         puts "A hora de entrada foi #{@hora_entrada}."
         puts "A hora de saída foi #{@hora_saida}."
     end
@@ -38,10 +38,10 @@ end
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
     
-    @@placas = []
+    @@veiculos = {}
 
-    def self.placas
-        @@placas
+    def self.veiculos
+        @@veiculos
     end
         
     def self.menu
@@ -98,7 +98,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 puts "O veículo de placa #{veiculo_encontrado} foi encontrado: \n\n"
                 veiculo = Veiculo.new
                 veiculo.placa = placa
-                veiculo.mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida)
+                veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida)
             else
                 puts "Veículo de placa #{placa} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"

@@ -1,11 +1,11 @@
 require 'time'
 require 'byebug'
 
-debugger
+#debugger
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    @veiculos = {}
+    # @veiculos = {}
     
     def mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         system 'clear'
@@ -23,11 +23,11 @@ end
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
     
-    #@@veiculos = {}
+    @@veiculos = {}
 
-    # def self.veiculos
-    #     @@veiculos
-    # end
+    def self.veiculos
+        @@veiculos
+    end
         
     def self.menu
         puts "\nO que deseja fazer?\n\n"
@@ -68,6 +68,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         veiculo.hora_entrada = Time.parse(gets.chomp)
         puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
+        ControleVeiculos.pausa
     end
 
     def cadastrar_saida
@@ -85,6 +86,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa_procurada = gets.strip
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
+        
         ControleVeiculos.veiculos.each do |placa, tag|
             #debugger
             if tag == placa_procurada
@@ -98,7 +100,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 veiculo = Veiculo.new
                 veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida = "cadastrada ainda NÃO!")
                 puts "==========================================================="
-                #ControleVeiculos.pausa
+                ControleVeiculos.pausa
                 break
             else
                 puts "Veículo de placa #{placa} não encontrado."
