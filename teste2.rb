@@ -1,16 +1,21 @@
 require 'time'
 require 'byebug'
 
-#debugger
+debugger
 class Veiculo
     attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
-    def mostrar(placa, nome_veiculo, dono_do_carro, hora_entrada, hora_saida) #Método para cada veículo.
+    @veiculos = {}
+    
+    def mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
+        system 'clear'
         puts "Placa do carro é #{@placa}."
         puts "O nome do carro é #{@nome_veiculo}."
-        puts "O nome do proprietário é #{@dono_do_carro}."
+        puts "O nome do proprietário é #{@dono_do_veiculo}."
         puts "A hora de entrada foi #{@hora_entrada}."
         puts "A hora de saída foi #{@hora_saida}."
+        ControleVeiculos.pausa
+
     end
 
 end
@@ -18,11 +23,11 @@ end
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
     
-    @@veiculos = {}
+    #@@veiculos = {}
 
-    def self.veiculos
-        @@veiculos
-    end
+    # def self.veiculos
+    #     @@veiculos
+    # end
         
     def self.menu
         puts "\nO que deseja fazer?\n\n"
@@ -49,20 +54,30 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         when SAIR_DO_SISTEMA
             SAIR_DO_SISTEMA
         end
-    end    
+    end
         
     def self.cadastrar_entrada()
         veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
-        veiculos[:placa] = gets.strip
+        veiculo.placa = gets.strip
         print "Digite o nome do veículo: "
-        veiculos[:nome_veiculo] = gets.chomp
+        veiculo.nome_veiculo = gets.chomp
         print "Digite o nome do proprietário do veículo: "
-        veiculos[:dono_do_carro] = gets.to_s
+        veiculo.dono_do_veiculo = gets.to_s.chomp
         print "Digite a hora de entrada do veículo: "
-        veiculos[:hora_entrada] = Time.parse(gets.chomp)
+        veiculo.hora_entrada = Time.parse(gets.chomp)
         puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
+    end
+
+    def cadastrar_saida
+        print "Digite a placa do veiculo: "
+        veiculo = Veiculo.new
+        veiculos.placa = gets.strip
+        print "Digite o horário de saída do veículo: "
+        veiculos.hora_saida = Time.parse(gets.chomp)
+        Veiculo.mostrar()
+
     end
 
     def self.buscar_veiculo
@@ -76,12 +91,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 puts "O veículo de placa #{tag} foi encontrado: \n\n"
                 veiculo = Veiculo.new
                 veiculo.placa = tag
-                veiculo.nome_veiculo = veiculos[:nome_veiculo]
-                veiculo.dono_do_veiculo = veiculos[:dono_do_carro]
-                veiculo.hora_entrada = veiculos[:hora_entrada]
-                veiculo.hora_saida = veiculos[:hora_saida]
-                #veiculo.nome_veiculo = nome_veiculo
-                veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida)
+                veiculo.nome_veiculo = @@veiculos[:nome_veiculo]
+                veiculo.dono_do_veiculo = @@veiculos[:dono_do_veiculo]
+                veiculo.hora_entrada = @@veiculos[:hora_entrada]
+                veiculo.hora_saida = @@veiculos[:hora_saida]
+                veiculo = Veiculo.new
+                veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida = "cadastrada ainda NÃO!")
                 puts "==========================================================="
                 #ControleVeiculos.pausa
                 break
@@ -95,7 +110,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                     #veiculo.mostrar
                     #ControleVacina.pausa
                 end
-            end  
+            end
         
         end
     end
@@ -103,7 +118,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         #Veiculo.busca_por_placa(placa)
 
      def self.pausa
-        sleep(3)
+        sleep(4)
         system "clear"
     end
     
