@@ -57,15 +57,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada()
-        veiculo = Veiculo.new #Iniciado instância do objeto.
+        #veiculo = Veiculo.new #Iniciado instância do objeto.
         print "Digite a placa do veiculo: "
-        veiculo.placa = gets.strip
+        ControleVeiculos.veiculos[:placa] = gets.strip
         print "Digite o nome do veículo: "
-        veiculo.nome_veiculo = gets.chomp
+        ControleVeiculos.veiculos[:nome_veiculo] = gets.chomp
         print "Digite o nome do proprietário do veículo: "
-        veiculo.dono_do_veiculo = gets.to_s.chomp
+        ControleVeiculos.veiculos[:dono_do_veiculo] = gets.to_s.chomp
         print "Digite a hora de entrada do veículo: "
-        veiculo.hora_entrada = Time.parse(gets.chomp)
+        ControleVeiculos.veiculos[:hora_entrada] = Time.parse(gets.chomp)
         puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
         ControleVeiculos.pausa
@@ -87,23 +87,23 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
-        ControleVeiculos.veiculos.each do |placa, tag|
+        ControleVeiculos.veiculos.each do |placa, placa_procurada|
             #debugger
-            if tag == placa_procurada
-                puts "O veículo de placa #{tag} foi encontrado: \n\n"
-                veiculo = Veiculo.new
-                veiculo.placa = tag
-                veiculo.nome_veiculo = @@veiculos[:nome_veiculo]
-                veiculo.dono_do_veiculo = @@veiculos[:dono_do_veiculo]
-                veiculo.hora_entrada = @@veiculos[:hora_entrada]
-                veiculo.hora_saida = @@veiculos[:hora_saida]
-                veiculo = Veiculo.new
-                veiculo.mostrar(veiculo.placa, veiculo.nome_veiculo, veiculo.dono_do_veiculo, veiculo.hora_entrada, veiculo.hora_saida = "cadastrada ainda NÃO!")
+            if ControleVeiculos.veiculos[:placa] == placa_procurada
+                puts "O veículo de placa #{placa_procurada} foi encontrado: \n\n"
+                #veiculo = Veiculo.new
+                placa = ControleVeiculos.veiculos[:placa]
+                nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
+                dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
+                hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
+                hora_saida = ControleVeiculos.veiculos[:hora_saida]
+                #veiculo = Veiculo.new
+                veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida = "cadastrada ainda NÃO!")
                 puts "==========================================================="
                 ControleVeiculos.pausa
                 break
             else
-                puts "Veículo de placa #{placa} não encontrado."
+                puts "Veículo de placa #{placa-procurada} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
                 opcao = gets.strip.upcase
                 if opcao == "S"
