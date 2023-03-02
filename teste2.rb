@@ -3,17 +3,18 @@ require 'byebug'
 
 #debugger
 class Veiculo
-    attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
+    #attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida
  
     # @veiculos = {}
     
     def mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         system 'clear'
-        puts "Placa do carro é #{@placa}."
-        puts "O nome do carro é #{@nome_veiculo}."
-        puts "O nome do proprietário é #{@dono_do_veiculo}."
-        puts "A hora de entrada foi #{@hora_entrada}."
-        puts "A hora de saída foi #{@hora_saida}."
+        puts "Placa do carro é #{placa}."
+        puts "O nome do carro é #{nome_veiculo}."
+        puts "O nome do proprietário é #{dono_do_veiculo}."
+        puts "A hora de entrada foi #{hora_entrada}."
+        puts "A hora de saída foi #{hora_saida}."
+        puts "=================================================="
         ControleVeiculos.pausa
 
     end
@@ -46,7 +47,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         when 1
             ControleVeiculos.cadastrar_entrada
         when 2
-            #ControleVeiculo.cadastrar_saida
+            ControleVeiculos.cadastrar_saida
         when 3
             ControleVeiculos.buscar_veiculo
         when 4
@@ -71,13 +72,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.pausa
     end
 
-    def cadastrar_saida
+    def self.cadastrar_saida
         print "Digite a placa do veiculo: "
-        veiculo = Veiculo.new
-        veiculos.placa = gets.strip
+        #veiculo = Veiculo.new
+        ControleVeiculos.veiculos[:placa] = placa_procurada(gets.strip)
         print "Digite o horário de saída do veículo: "
-        veiculos.hora_saida = Time.parse(gets.chomp)
-        Veiculo.mostrar()
+        ControleVeiculos.veiculos[:hora_saida] = Time.parse(gets.chomp)
+
+        #Veiculo.mostrar()
 
     end
 
@@ -97,8 +99,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
                 hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
                 hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                veiculo = Veiculo.new
-                veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida = "cadastrada ainda NÃO!")
+                if hora_saida = nil
+                    hora_saida = "cadastrada ainda NÃO!"
+                else
+                    hora_saida = ControleVeiculos.veiculos[:hora_saida]
+                end
+                    veiculo = Veiculo.new
+                veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
                 puts "==========================================================="
                 ControleVeiculos.pausa
                 break
