@@ -82,7 +82,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.buscar_veiculo
-        print "\nDigite a placa do veículo? "
+        print "\nDigite a placa do veículo: "
         placa_procurada = gets.strip
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
@@ -97,7 +97,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
                 hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
                 hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                #veiculo = Veiculo.new
+                veiculo = Veiculo.new
                 veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida = "cadastrada ainda NÃO!")
                 puts "==========================================================="
                 ControleVeiculos.pausa
@@ -111,6 +111,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                     #puts "====================================="
                     #veiculo.mostrar
                     #ControleVacina.pausa
+                else
+                    break    
                 end
             end
         
