@@ -78,6 +78,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
         puts "+==========================================+"
         ControleVeiculos.pausa
+        ControleVeiculos.menu
     end
 
     def self.cadastrar_saida
