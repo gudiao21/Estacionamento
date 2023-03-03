@@ -63,7 +63,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada
-        debugger
+        #debugger
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
         print "Digite o nome do veículo: "
@@ -92,9 +92,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
        
     def self.buscar_veiculo
-        #placa_procurada = nil
+        placa_procurada = nil
         print "\nDigite a placa do veículo: "
-        placa_procurada = gets.strip
+        placa_procurada = gets.to_s.strip
         ControleVeiculos.loop_busca_em_comum(placa_procurada)
     end
 
@@ -103,16 +103,17 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
-        ControleVeiculos.veiculos.each do |placa, v|
+        ControleVeiculos.veiculos.each do |placa, veiculo|
         #debugger
-            if v == placa_procurada
+            if veiculo[:placa] == placa_procurada
                 puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
-                placa = ControleVeiculos.veiculos[:placa]
-                nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
-                dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
-                hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
-                hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                hora_saida = ControleVeiculos.veiculos[:hora_saida]
+                veiculo_encontrado = veiculo
+                placa = veiculo_encontrado[:placa]
+                nome_veiculo = veiculo_encontrado[:nome_veiculo]
+                dono_do_veiculo = veiculo_encontrado[:dono_do_veiculo]
+                hora_entrada = veiculo_encontrado[:hora_entrada]
+                hora_saida = veiculo_encontrado[:hora_saida]
+                hora_saida = veiculo_encontrado[:hora_saida]
                 if hora_saida == nil
                     veiculo = Veiculo.new
                     veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
