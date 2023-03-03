@@ -31,6 +31,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.menu
+        system 'clear'
         puts "\nO que deseja fazer?\n\n"
         puts "Digite (1) para cadastrar entrada do veículo."
         puts "Digite (2) para cadastrar saída do veículo."
@@ -54,11 +55,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
         when SAIR_DO_SISTEMA
             SAIR_DO_SISTEMA
+        else
+            puts "Você tem que digitar um número entre 1 a 5 apenas, por favor!"
+            ControleVeiculos.pausa
+            ControleVeiculos.menu
         end
     end
         
-    def self.cadastrar_entrada()
-        #veiculo = Veiculo.new #Iniciado instância do objeto.
+    def self.cadastrar_entrada
         print "Digite a placa do veiculo: "
         ControleVeiculos.veiculos[:placa] = gets.strip
         print "Digite o nome do veículo: "
@@ -70,6 +74,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "Veiculo Cadastrado com sucesso."
         puts "======================================"
         ControleVeiculos.pausa
+
     end
 
     def self.cadastrar_saida
@@ -88,7 +93,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "\nDigite a placa do veículo: "
         placa_procurada = gets.strip
         ControleVeiculos.loop_busca_em_comum
-                
     end
 
 
@@ -106,11 +110,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
                 hora_saida = ControleVeiculos.veiculos[:hora_saida]
                 hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                veiculo = Veiculo.new
-                veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
-                puts "==========================================================="
-                ControleVeiculos.pausa
-                break
+                if hora_saida == nil
+                    veiculo = Veiculo.new
+                    veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
+                    puts "==========================================================="
+                    ControleVeiculos.pausa
+                    break
+                else
+                    ControleVeiculos.calculo
+                end    
             else
                 puts "Veículo de placa #{placa_procurada} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
@@ -130,12 +138,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
 
     def self.calculo
-        
+        minuto_total = ((ControleVeiculos.veiculos[:hora_saida]) - (ControleVeiculos.veiculos[:hora_entrada]))/60
+        resultado = minuto_total * 0.17
+        puts "O valor total ficou em #{sprintf('R$ %.2f', resultado)}."
+        ControleVeiculos.pausa
+        ControleVeiculos.menu
     end
 
     def self.pausa
         sleep(4)
-        system "clear"
+       
     end
     
     def self.init
