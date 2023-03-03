@@ -63,8 +63,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada
+        debugger
         print "Digite a placa do veiculo: "
-        placa = gets.strip
+        placa = gets.to_s.strip
         print "Digite o nome do veículo: "
         nome_veiculo = gets.chomp
         print "Digite o nome do proprietário do veículo: "
@@ -72,6 +73,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite a hora de entrada do veículo: "
         hora_entrada = Time.parse(gets.chomp)
         novo_veiculo = {placa:placa, nome_veiculo: nome_veiculo, dono_do_veiculo: dono_do_veiculo, hora_entrada: hora_entrada}
+        @@veiculos[placa] = novo_veiculo
         puts "+==========================================+"
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
         puts "+==========================================+"
@@ -90,7 +92,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
        
     def self.buscar_veiculo
-        placa_procurada = nil
+        #placa_procurada = nil
         print "\nDigite a placa do veículo: "
         placa_procurada = gets.strip
         ControleVeiculos.loop_busca_em_comum(placa_procurada)
@@ -102,7 +104,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
         ControleVeiculos.veiculos.each do |placa, v|
-        debugger
+        #debugger
             if v == placa_procurada
                 puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
                 placa = ControleVeiculos.veiculos[:placa]
