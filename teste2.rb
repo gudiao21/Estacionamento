@@ -84,7 +84,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa_procurada = ControleVeiculos.veiculos[:placa]
         print "Digite o horário de saída do veículo: "
         ControleVeiculos.veiculos[:hora_saida] = Time.parse(gets.chomp)
-        ControleVeiculos.loop_busca_em_comum
+        ControleVeiculos.loop_busca_em_comum(placa_procurada)
 
     end
        
@@ -92,15 +92,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa_procurada = nil
         print "\nDigite a placa do veículo: "
         placa_procurada = gets.strip
-        ControleVeiculos.loop_busca_em_comum
+        ControleVeiculos.loop_busca_em_comum(placa_procurada)
     end
 
 
-    def self.loop_busca_em_comum 
+    def self.loop_busca_em_comum(placa_procurada)
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
-        ControleVeiculos.veiculos.each do |placa, placa_procurada|
+        ControleVeiculos.veiculos.each do |placa, v|
         #debugger
             if ControleVeiculos.veiculos[:placa] == placa_procurada
                 puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
@@ -118,7 +118,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                     break
                 else
                     ControleVeiculos.calculo
-                end    
+                end
             else
                 puts "Veículo de placa #{placa_procurada} não encontrado."
                 puts "Deseja cadastrar a placa? (S/N)"
@@ -147,7 +147,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
     def self.pausa
         sleep(4)
-       
     end
     
     def self.init
