@@ -7,16 +7,20 @@ class Veiculo
  
     # @veiculos = {}
     
-    def mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
+    def mostrar_entrada(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         system 'clear'
         puts "Placa do carro é #{placa}."
         puts "O nome do carro é #{nome_veiculo}."
         puts "O nome do proprietário é #{dono_do_veiculo}."
         puts "A hora de entrada foi #{hora_entrada}."
-        puts "A hora de saída foi #{hora_saida}."
+        #puts "A hora de saída foi #{hora_saida}."
         puts "=================================================="
         ControleVeiculos.pausa
+    end
 
+    def mostar_saida
+        puts "A hora de saída foi #{hora_saida}"
+        ControleVeiculos.pausa
     end
 
 end
@@ -46,9 +50,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         opcao = gets.to_i
         case opcao
         when 1
-            ControleVeiculos.cadastrar_entrada_saida
+            ControleVeiculos.cadastrar_entrada
         when 2
-            ControleVeiculos.cadastrar_entrada_saida
+            ControleVeiculos.cadastrar_saida
         when 3
             ControleVeiculos.buscar_veiculo
         when 4
@@ -62,7 +66,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         end
     end
         
-    def self.cadastrar_entrada_saida
+    def self.cadastrar_entrada
         #debugger
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
@@ -83,8 +87,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.menu
     end
 
-    # def self.cadastrar_saida
-    #     print "Digite a placa do veiculo: "
+    def self.cadastrar_saida
+        debugger
+        @novo_veiculo = {}
+        print "Digite a placa do veiculo: "
+        @novo_veiculo[:placa] = gets.to_s.strip
+        print "Digite a hora de saída do veículo: "
+        @novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
+        @@veiculos[@novo_veiculo[:placa]] = @novo_veiculo
+        ControleVeiculos.pausa
+        #     print "Digite a placa do veiculo: "
     #     @novo_veiculo[:placa] = gets.to_s.strip
         # if @novo_veiculo[:placa] == @@veiculos[:placa]
         #     print "Digite o horário de saída do veículo: "
@@ -106,7 +118,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     #                 ControleVeiculos.mensagem
     #             end
     #     end
-    # end
+    end
        
     def self.buscar_veiculo
         print "Digite a placa do veículo: "
@@ -126,46 +138,46 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
 
-    def self.loop_busca_em_comum(placa_procurada)
+    # def self.loop_busca_em_comum(placa_procurada)
         
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
-        ControleVeiculos.veiculos.each do |placa, veiculo|
-        debugger
-            if veiculo == placa_procurada
-                puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
-                veiculo_encontrado = veiculo
-                placa = ControleVeiculos.veiculos[:placa]
-                nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
-                dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
-                hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
-                hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                hora_saida = ControleVeiculos.veiculos[:hora_saida]
-                if hora_saida == nil
-                    veiculo = Veiculo.new
-                    veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
-                    puts "==========================================================="
-                    ControleVeiculos.pausa
-                    break
-                else
-                    ControleVeiculos.calculo
-                end
-            else
-                puts "Veículo de placa #{placa_procurada} não encontrado."
-                puts "Deseja cadastrar a placa? (S/N)"
-                opcao = gets.strip.upcase
-                if opcao == "S"
-                    ControleVeiculo.cadastrar_entrada
+        # ControleVeiculos.veiculos.each do |placa, veiculo|
+        # debugger
+        #     if veiculo == placa_procurada
+        #         puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
+        #         veiculo_encontrado = veiculo
+        #         placa = ControleVeiculos.veiculos[:placa]
+        #         nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
+        #         dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
+        #         hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
+        #         hora_saida = ControleVeiculos.veiculos[:hora_saida]
+        #         hora_saida = ControleVeiculos.veiculos[:hora_saida]
+        #         if hora_saida == nil
+        #             veiculo = Veiculo.new
+        #             veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
+        #             puts "==========================================================="
+        #             ControleVeiculos.pausa
+        #             break
+        #         else
+        #             ControleVeiculos.calculo
+        #         end
+        #     else
+        #         puts "Veículo de placa #{placa_procurada} não encontrado."
+        #         puts "Deseja cadastrar a placa? (S/N)"
+        #         opcao = gets.strip.upcase
+        #         if opcao == "S"
+        #             ControleVeiculo.cadastrar_entrada
                             #puts "====================================="
                             #veiculo.mostrar
                             #ControleVacina.pausa
-                else
-                    break
-                end
-            end
+    #             else
+    #                 break
+    #             end
+    #         end
                 
-        end
-    end        
+    #     end
+    # end        
 
 
     def self.calculo
