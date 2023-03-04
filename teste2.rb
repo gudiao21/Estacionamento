@@ -84,15 +84,24 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_saida
-        @novo_veiculo = ControleVeiculos.new #Criando instância
-        @novo_veiculo.
         print "Digite a placa do veiculo: "
-        ControleVeiculos.veiculos[:placa] = gets.strip
-        placa_procurada = ControleVeiculos.veiculos[:placa]
-        print "Digite o horário de saída do veículo: "
-        ControleVeiculos.veiculos[:hora_saida] = Time.parse(gets.chomp)
-        ControleVeiculos.loop_busca_em_comum(placa_procurada)
-
+        @novo_veiculo[:placa] = gets.to_s.strip
+        if @novo_veiculo[:placa] == @@veiculos[:placa]
+            print "Digite o horário de saída do veículo: "
+            novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
+        else
+            puts "Placa não encontrada no sistema. Deseja fazer um novo cadastro de entrada? (S/N)"
+                opcao = gets.to_s.chomp.strip
+                case opcao
+                when "S"
+                    ControleVeiculos.cadastrar_entrada
+                when "N"
+                    puts "VOCÊ ESCOLHEU (N)! VOLTANDO PARA O MENU PRINCIPAL."
+                    ControleVeiculos.menu
+                else
+                    puts "VOCÊ DIGITOU ALGO DIFERENTE DE (S/N), POR FAVOR SE LIMITE ÀS DUAS OPÇÕES APENAS!"    
+                end
+        end
     end
        
     def self.buscar_veiculo
