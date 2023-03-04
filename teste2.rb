@@ -27,6 +27,11 @@ end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     SAIR_DO_SISTEMA = 5
+
+    def initialize
+        #@veiculos = {}
+        @novo_veiculo = {}
+    end
     
     @@veiculos = {}
 
@@ -95,9 +100,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite a hora de saída do veículo: "
         @novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
         @@veiculos[@novo_veiculo[:placa]] = @novo_veiculo
+        @veiculos[@novo_veiculo[:placa]][:hora_saida] = @novo_veiculo[:hora_saida] # adiciona hora_saida ao hash veiculo
         puts "+==========================================+"
         puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
         puts "+==========================================+"
+        ControleVeiculos.pausa
+        ControleVeiculos.calculo(@novo_veiculo[:hora_entrada], @novo_veiculo[:hora_saida])
+        else
+          puts "Veículo não encontrado!"
+        end
         ControleVeiculos.pausa
         ControleVeiculos.calculo(hora_entrada,hora_saida)
 
