@@ -64,16 +64,18 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         
     def self.cadastrar_entrada
         #debugger
+        @novo_veiculo = {}
         print "Digite a placa do veiculo: "
-        placa = gets.to_s.strip
+        @novo_veiculo[:placa] = gets.to_s.strip
         print "Digite o nome do veículo: "
-        nome_veiculo = gets.chomp
+        @novo_veiculo[:nome_veiculo] = gets.chomp
         print "Digite o nome do proprietário do veículo: "
-        dono_do_veiculo = gets.to_s.chomp
+        @novo_veiculo[:dono_do_veiculo] = gets.to_s.chomp
         print "Digite a hora de entrada do veículo: "
-        hora_entrada = Time.parse(gets.chomp)
-        novo_veiculo = {placa:placa, nome_veiculo: nome_veiculo, dono_do_veiculo: dono_do_veiculo, hora_entrada: hora_entrada}
-        @@veiculos[placa] = novo_veiculo
+        @novo_veiculo[:hora_entrada] = Time.parse(gets.chomp)
+        @@veiculos[@novo_veiculo[:placa]] = @novo_veiculo
+        #novo_veiculo = {placa:placa, nome_veiculo: nome_veiculo, dono_do_veiculo: dono_do_veiculo, hora_entrada: hora_entrada}
+        #ControleVeiculos.veiculos
         puts "+==========================================+"
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
         puts "+==========================================+"
@@ -82,7 +84,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_saida
-        placa_procurada = nil
+        @novo_veiculo = ControleVeiculos.new #Criando instância
+        @novo_veiculo.
         print "Digite a placa do veiculo: "
         ControleVeiculos.veiculos[:placa] = gets.strip
         placa_procurada = ControleVeiculos.veiculos[:placa]
@@ -93,10 +96,20 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
        
     def self.buscar_veiculo
-        placa_procurada = nil
-        print "\nDigite a placa do veículo: "
-        placa_procurada = gets.to_s.strip
-        ControleVeiculos.loop_busca_em_comum(placa_procurada)
+        print "Digite a placa do veículo: "
+        placa = gets.strip
+        if @@veiculos.key?(placa)
+          veiculo = @@veiculos[placa]
+          puts "Veículo encontrado:"
+          Veiculo.new.mostrar(veiculo[:placa], veiculo[:nome_veiculo], veiculo[:dono_do_veiculo], veiculo[:hora_entrada], veiculo[:hora_saida])
+        else
+          puts "Veículo não encontrado"
+        end
+        pausa
+        # placa_procurada = nil
+        # print "\nDigite a placa do veículo: "
+        # placa_procurada = gets.to_s.strip
+        # ControleVeiculos.loop_busca_em_comum(placa_procurada)
     end
 
 
@@ -106,15 +119,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         
         ControleVeiculos.veiculos.each do |placa, veiculo|
         #debugger
-            if veiculo[:placa] == placa_procurada
+            if veiculo == placa_procurada
                 puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
                 veiculo_encontrado = veiculo
-                placa = veiculo_encontrado[:placa]
-                nome_veiculo = veiculo_encontrado[:nome_veiculo]
-                dono_do_veiculo = veiculo_encontrado[:dono_do_veiculo]
-                hora_entrada = veiculo_encontrado[:hora_entrada]
-                hora_saida = veiculo_encontrado[:hora_saida]
-                hora_saida = veiculo_encontrado[:hora_saida]
+                placa = ControleVeiculos.veiculos[:placa]
+                nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
+                dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
+                hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
+                hora_saida = ControleVeiculos.veiculos[:hora_saida]
+                hora_saida = ControleVeiculos.veiculos[:hora_saida]
                 if hora_saida == nil
                     veiculo = Veiculo.new
                     veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
