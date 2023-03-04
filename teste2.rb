@@ -46,9 +46,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         opcao = gets.to_i
         case opcao
         when 1
-            ControleVeiculos.cadastrar_entrada
+            ControleVeiculos.cadastrar_entrada_saida
         when 2
-            ControleVeiculos.cadastrar_saida
+            ControleVeiculos.cadastrar_entrada_saida
         when 3
             ControleVeiculos.buscar_veiculo
         when 4
@@ -62,7 +62,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         end
     end
         
-    def self.cadastrar_entrada
+    def self.cadastrar_entrada_saida
         #debugger
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
@@ -83,36 +83,40 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.menu
     end
 
-    def self.cadastrar_saida
-        print "Digite a placa do veiculo: "
-        @novo_veiculo[:placa] = gets.to_s.strip
-        if @novo_veiculo[:placa] == @@veiculos[:placa]
-            print "Digite o horário de saída do veículo: "
-            novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
-        else
-            puts "Placa não encontrada no sistema. Deseja fazer um novo cadastro de entrada? (S/N)"
-                opcao = gets.to_s.chomp.strip
-                case opcao
-                when "S"
-                    ControleVeiculos.cadastrar_entrada
-                when "N"
-                    puts "VOCÊ ESCOLHEU (N)! VOLTANDO PARA O MENU PRINCIPAL."
-                    ControleVeiculos.menu
-                else
-                    puts "VOCÊ DIGITOU ALGO DIFERENTE DE (S/N), POR FAVOR SE LIMITE ÀS DUAS OPÇÕES APENAS!"    
-                end
-        end
-    end
+    # def self.cadastrar_saida
+    #     print "Digite a placa do veiculo: "
+    #     @novo_veiculo[:placa] = gets.to_s.strip
+        # if @novo_veiculo[:placa] == @@veiculos[:placa]
+        #     print "Digite o horário de saída do veículo: "
+        #     @novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
+        #     @@veiculos[@novo_veiculo[:placa]] = @novo_veiculo
+    #     else
+    #         def mensagem
+    #             puts "Placa não encontrada no sistema. Deseja fazer um novo cadastro de entrada? (S/N)"
+    #         end
+    #             opcao = gets.to_s.chomp.strip
+    #             case opcao
+    #             when "S"
+    #                 ControleVeiculos.cadastrar_entrada
+    #             when "N"
+    #                 puts "VOCÊ ESCOLHEU (N)! VOLTANDO PARA O MENU PRINCIPAL."
+    #                 ControleVeiculos.menu
+    #             else
+    #                 puts "VOCÊ DIGITOU ALGO DIFERENTE DE (S/N), POR FAVOR SE LIMITE ÀS DUAS OPÇÕES APENAS!"
+    #                 ControleVeiculos.mensagem
+    #             end
+    #     end
+    # end
        
     def self.buscar_veiculo
         print "Digite a placa do veículo: "
         placa = gets.strip
-        if @@veiculos.key?(placa)
+        if @@veiculos.key?(placa) #Se "placa" já estiver sendo usada como chave em @@veiculos, o que indica que um veículo com essa placa já foi cadastrado.
           veiculo = @@veiculos[placa]
-          puts "Veículo encontrado:"
+          puts "Veículo de placa #{veiculo} encontrado:"
           Veiculo.new.mostrar(veiculo[:placa], veiculo[:nome_veiculo], veiculo[:dono_do_veiculo], veiculo[:hora_entrada], veiculo[:hora_saida])
         else
-          puts "Veículo não encontrado"
+          puts "Veículo de placa #{veiculo} não encontrado!"
         end
         pausa
         # placa_procurada = nil
@@ -127,7 +131,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
         
         ControleVeiculos.veiculos.each do |placa, veiculo|
-        #debugger
+        debugger
             if veiculo == placa_procurada
                 puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
                 veiculo_encontrado = veiculo
