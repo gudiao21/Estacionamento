@@ -72,7 +72,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada
-        #debugger
+        debugger
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
         @novo_veiculo[:placa] = gets.to_s.strip
@@ -105,7 +105,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
             ControleVeiculos.pausa
-
             ControleVeiculos.calculo(@novo_veiculo[:hora_entrada], @novo_veiculo[:hora_saida])
         else
             #ControleVeiculos.veiculo_nao_encontrado
@@ -139,11 +138,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite a placa do veículo: "
         placa = gets.strip
         if @@veiculos.key?(placa) #Se "placa" já estiver sendo usada como chave em @@veiculos, o que indica que um veículo com essa placa já foi cadastrado.
-          veiculo = @@veiculos[placa]
-          puts "Veículo de placa #{veiculo} encontrado:"
-          Veiculo.new.mostrar_entrada_saida(veiculo[:placa], veiculo[:nome_veiculo], veiculo[:dono_do_veiculo], veiculo[:hora_entrada], veiculo[:hora_saida])
+            veiculo = @@veiculos[placa]
+            puts "Veículo de placa #{veiculo} encontrado:"
+            Veiculo.new.mostrar_entrada_saida(veiculo[:placa], veiculo[:nome_veiculo], veiculo[:dono_do_veiculo], veiculo[:hora_entrada], veiculo[:hora_saida])
         else
-          puts "Veículo de placa #{veiculo} não encontrado!"
+            puts "Veículo de placa #{veiculo} não encontrado!"
         end
         pausa
         # placa_procurada = nil
@@ -153,16 +152,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.relatorio
-        relatorio = "+===== RELATÓRIO =====+\n"
-        relatorio += "| PLACA | NOME DO VEÍCULO | DONO DO VEÍCULO | HORA DE ENTRADA | HORA DE SAÍDA | VALOR |\n"
-        relatorio += "+-------+-----------------+----------------+----------------+---------------+-------+\n"
-    
+        puts "PLACA\tNOME DO VEÍCULO\tDONO DO VEÍCULO\tHORA ENTRADA\tHORA SAÍDA\tVALOR"
+        puts "====================================================================================="
+        
         @@veiculos.each do |placa, dados|
-          relatorio += "| #{placa} | #{dados[:nome_veiculo].ljust(16)} | #{dados[:dono_do_veiculo].ljust(14)} | #{dados[:hora_entrada].strftime("%d/%m/%Y %H:%M:%S")} | #{dados[:hora_saida].strftime("%d/%m/%Y %H:%M:%S")} | #{dados[:valor].to_s.rjust(5)} |\n"
+            printf("%s\t%s\t%s\t%s\t%s\t%.2f\n", placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:valor] ? dados[:valor] : 0)
         end
-    
-        relatorio += "+-------+-----------------+----------------+----------------+---------------+-------+\n"
-        return relatorio
         ControleVeiculos.pausa
         ControleVeiculos.pausa
     end
@@ -211,7 +206,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     def self.calculo(hora_entrada, hora_saida)
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
-        puts "O valor total a pagar ficou em: #{sprintf('R$ %.2f', resultado)}."
+        puts "O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}."
         ControleVeiculos.pausa
         ControleVeiculos.menu
     end
