@@ -72,12 +72,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada
-        debugger
+        #debugger
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
-        @novo_veiculo[:placa] = gets.to_s.strip
+        @novo_veiculo[:placa] = gets.to_s.chomp.strip
         print "Digite o nome do veículo: "
-        @novo_veiculo[:nome_veiculo] = gets.chomp
+        @novo_veiculo[:nome_veiculo] = gets.to_s.strip.chomp
         print "Digite o nome do proprietário do veículo: "
         @novo_veiculo[:dono_do_veiculo] = gets.to_s.chomp
         print "Digite a hora de entrada do veículo: "
@@ -91,7 +91,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_saida
-        #debugger
+        debugger
         print "Digite a placa do veiculo: "
         @novo_veiculo[:placa] = gets.to_s.strip
       
@@ -135,6 +135,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     # end
        
     def self.buscar_veiculo
+        #debugger
         print "Digite a placa do veículo: "
         placa = gets.strip
         if @@veiculos.key?(placa) #Se "placa" já estiver sendo usada como chave em @@veiculos, o que indica que um veículo com essa placa já foi cadastrado.
@@ -152,6 +153,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.relatorio
+        #debugger
         puts "PLACA\tNOME DO VEÍCULO\tDONO DO VEÍCULO\tHORA ENTRADA\tHORA SAÍDA\tVALOR"
         puts "====================================================================================="
         
@@ -204,6 +206,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     # end        
 
     def self.calculo(hora_entrada, hora_saida)
+        system 'clear'
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
         puts "O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}."
