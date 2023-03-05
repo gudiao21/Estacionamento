@@ -199,7 +199,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     #     end
     # end        
 
-
     def self.calculo(hora_entrada, hora_saida)
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
