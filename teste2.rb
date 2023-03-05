@@ -153,7 +153,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.relatorio
-        puts @@veiculos
+        relatorio = "+===== RELATÓRIO =====+\n"
+        relatorio += "| PLACA | NOME DO VEÍCULO | DONO DO VEÍCULO | HORA DE ENTRADA | HORA DE SAÍDA | VALOR |\n"
+        relatorio += "+-------+-----------------+----------------+----------------+---------------+-------+\n"
+    
+        @@veiculos.each do |placa, dados|
+          relatorio += "| #{placa} | #{dados[:nome_veiculo].ljust(16)} | #{dados[:dono_do_veiculo].ljust(14)} | #{dados[:hora_entrada].strftime("%d/%m/%Y %H:%M:%S")} | #{dados[:hora_saida].strftime("%d/%m/%Y %H:%M:%S")} | #{dados[:valor].to_s.rjust(5)} |\n"
+        end
+    
+        relatorio += "+-------+-----------------+----------------+----------------+---------------+-------+\n"
+        return relatorio
         ControleVeiculos.pausa
         ControleVeiculos.pausa
     end
