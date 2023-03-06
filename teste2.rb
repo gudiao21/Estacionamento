@@ -92,22 +92,23 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
     def self.cadastrar_saida
         #debugger
-        @novo_veiculo = {} 
         print "Digite a placa do veiculo: "
-        @novo_veiculo[:placa] = @@veiculos[gets.to_s.strip]
-        puts "Você acabou de digitar #{@novo_veiculo[:placa]} para a placa do veículo."
+        placa = gets.to_s.strip
+        puts "Você acabou de digitar #{placa} para a placa do veículo."
       
-        if @@veiculos.key?(@novo_veiculo[:placa])
-            #veiculo = @@veiculos[@novo_veiculo[:placa]]
+        if @@veiculos.key?(placa)
+            debugger
             print "Digite a hora de saída do veículo: "
-            @novo_veiculo[:hora_saida] = Time.parse(gets.chomp)
-            @@veiculos[@novo_veiculo[:placa]] = @novo_veiculo
-            @@veiculos[@novo_veiculo[:placa]][:hora_saida] = @novo_veiculo[:hora_saida]
+            hora_saida_string = gets.chomp
+            puts "HOra de saída digitado: #{hora_saida_string}"
+            hora_saida = Time.parse(hora_saida_string)
+            @@veiculos[:placa][:hora_saida]= @novo_veiculo
+            @@veiculos[@novo_veiculo[:placa]][:hora_saida] = hora_saida
             puts "+==========================================+"
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
             ControleVeiculos.pausa
-            ControleVeiculos.calculo(@novo_veiculo[:hora_entrada], @novo_veiculo[:hora_saida])
+            ControleVeiculos.calculo(@@veiculos[placa], [:hora_entrada], hora_saida)
         else
             #ControleVeiculos.veiculo_nao_encontrado
             puts "Veículo de placa #{@novo_veiculo[:placa]} não encontrado!"
@@ -128,13 +129,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
           
         end
     end
-
-    # def self.veiculo_nao_encontrado
-    #     puts "Veículo de placa #{@novo_veiculo[:placa]} não encontrado!"
-    #     print "Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)"
-    #     opcao = gets.to_s.strip
-        
-    # end
        
     def self.buscar_veiculo
         #debugger
@@ -148,10 +142,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "Veículo de placa #{veiculo} não encontrado!"
         end
         pausa
-        # placa_procurada = nil
-        # print "\nDigite a placa do veículo: "
-        # placa_procurada = gets.to_s.strip
-        # ControleVeiculos.loop_busca_em_comum(placa_procurada)
+
     end
 
     def self.relatorio
@@ -166,48 +157,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.pausa
     end
     
-    # def self.loop_busca_em_comum(placa_procurada)
-        
-        #ControleVeiculo.placas.find{ |veiculo| veiculo.placa == placa }
-        
-        # ControleVeiculos.veiculos.each do |placa, veiculo|
-        # debugger
-        #     if veiculo == placa_procurada
-        #         puts "O veículo de placa #{placa_procurada} foi encontrado. \n\n"
-        #         veiculo_encontrado = veiculo
-        #         placa = ControleVeiculos.veiculos[:placa]
-        #         nome_veiculo = ControleVeiculos.veiculos[:nome_veiculo]
-        #         dono_do_veiculo = ControleVeiculos.veiculos[:dono_do_veiculo]
-        #         hora_entrada = ControleVeiculos.veiculos[:hora_entrada]
-        #         hora_saida = ControleVeiculos.veiculos[:hora_saida]
-        #         hora_saida = ControleVeiculos.veiculos[:hora_saida]
-        #         if hora_saida == nil
-        #             veiculo = Veiculo.new
-        #             veiculo.mostrar(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida)
-        #             puts "==========================================================="
-        #             ControleVeiculos.pausa
-        #             break
-        #         else
-        #             ControleVeiculos.calculo
-        #         end
-        #     else
-        #         puts "Veículo de placa #{placa_procurada} não encontrado."
-        #         puts "Deseja cadastrar a placa? (S/N)"
-        #         opcao = gets.strip.upcase
-        #         if opcao == "S"
-        #             ControleVeiculo.cadastrar_entrada
-                            #puts "====================================="
-                            #veiculo.mostrar
-                            #ControleVacina.pausa
-    #             else
-    #                 break
-    #             end
-    #         end
-                
-    #     end
-    # end        
-
-    def self.calculo(hora_entrada, hora_saida)
+    def self.calculo(placa, hora_entrada, hora_saida)
         system 'clear'
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
