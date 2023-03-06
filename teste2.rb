@@ -91,9 +91,10 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_saida
-        debugger
+        #debugger
         print "Digite a placa do veiculo: "
         @novo_veiculo[:placa] = gets.to_s.strip
+        puts "Você acabou de digitar #{@novo_veiculo[:placa]} para a placa do veículo."
       
         if @@veiculos.key?(@novo_veiculo[:placa])
             #veiculo = @@veiculos[@novo_veiculo[:placa]]
