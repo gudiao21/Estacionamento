@@ -94,21 +94,22 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         #debugger
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
-        puts "Você acabou de digitar #{placa} para a placa do veículo."
+        puts "Você acabou de digitar (#{placa}) para a placa do veículo."
       
         if @@veiculos.key?(placa)
-            debugger
+            #debugger
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
             puts "Hora de saída digitado: #{hora_saida_string}."
             hora_saida = Time.strptime(hora_saida_string, "%H:%M")
-            @@veiculos[:placa][:hora_saida]= @novo_veiculo
+            #debugger
+            @@veiculos[placa][:hora_saida] = @novo_veiculo #Corrigido 07/03/23, estava @@veiculos[:placa] ...
             @@veiculos[@novo_veiculo[:placa]][:hora_saida] = hora_saida
             puts "+==========================================+"
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
             ControleVeiculos.pausa
-            ControleVeiculos.calculo(@@veiculos[placa], [:hora_entrada], hora_saida)
+            ControleVeiculos.calculo(@@veiculos[placa], @@veiculos[placa][:hora_entrada], hora_saida)
         else
             #ControleVeiculos.veiculo_nao_encontrado
             puts "Veículo de placa #{@novo_veiculo[:placa]} não encontrado!"
@@ -159,6 +160,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     
     def self.calculo(placa, hora_entrada, hora_saida)
         system 'clear'
+        #debugger
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
         puts "O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}."
