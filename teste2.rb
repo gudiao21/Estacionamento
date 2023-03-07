@@ -100,8 +100,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             debugger
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
-            puts "HOra de saída digitado: #{hora_saida_string}"
-            hora_saida = Time.parse(hora_saida_string)
+            puts "Hora de saída digitado: #{hora_saida_string}."
+            hora_saida = Time.strptime(hora_saida_string, "%H:%M")
             @@veiculos[:placa][:hora_saida]= @novo_veiculo
             @@veiculos[@novo_veiculo[:placa]][:hora_saida] = hora_saida
             puts "+==========================================+"
