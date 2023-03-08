@@ -20,7 +20,7 @@ class Veiculo
         else    
             puts "A hora de saída foi #{hora_saida}."
             puts "=================================================="
-        end    
+        end
         ControleVeiculos.pausa
     end
 
@@ -92,10 +92,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.cadastrar_saida
-        #debugger
+        debugger
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
-        puts "Você acabou de digitar (#{placa}) para a placa do veículo."
+        
+        puts "Você acabou de digitar #{placa} para a placa do veículo."
       
         #debugger
         if @@veiculos.key?(placa)
