@@ -9,6 +9,7 @@ class Veiculo
     
     def mostrar_entrada_saida(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         system 'clear'
+        #debugger
         puts "Placa do carro é #{placa}."
         puts "O nome do carro é #{nome_veiculo}."
         puts "O nome do proprietário é #{dono_do_veiculo}."
@@ -96,11 +97,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa = gets.to_s.strip
         puts "Você acabou de digitar (#{placa}) para a placa do veículo."
       
+        #debugger
         if @@veiculos.key?(placa)
             #debugger
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
-            puts "Hora de saída digitado: #{hora_saida_string}."
+            puts "Hora de saída digitado: (#{hora_saida_string})."
             hora_saida = Time.strptime(hora_saida_string, "%H:%M")
             #debugger
             @@veiculos[placa][:hora_saida] = @novo_veiculo #Corrigido 07/03/23, estava @@veiculos[:placa] ...
@@ -109,7 +111,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
             ControleVeiculos.pausa
-            ControleVeiculos.calculo(@@veiculos[placa], @@veiculos[placa][:hora_entrada], hora_saida)
+            #debugger
+            ControleVeiculos.calculo(@@veiculos[placa][:hora_entrada], hora_saida)
         else
             #ControleVeiculos.veiculo_nao_encontrado
             puts "Veículo de placa #{@novo_veiculo[:placa]} não encontrado!"
@@ -158,7 +161,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.pausa
     end
     
-    def self.calculo(placa, hora_entrada, hora_saida)
+    def self.calculo(hora_entrada, hora_saida)
         system 'clear'
         #debugger
         minuto_total = ((hora_saida) - (hora_entrada))/60
