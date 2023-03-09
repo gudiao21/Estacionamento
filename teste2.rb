@@ -88,8 +88,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "+==========================================+"
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
         puts "+==========================================+"
-        ControleVeiculos.pausa
-        ControleVeiculos.menu
+        ControleVeiculos.volta_menu
+        # ControleVeiculos.pausa
+        # ControleVeiculos.menu
     end
 
     def self.cadastrar_saida
@@ -106,7 +107,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             #debugger
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
-            puts "Hora de saída digitado: (#{hora_saida_string})."
+            #puts "Hora de saída digitado: (#{hora_saida_string})."
             hora_saida = Time.strptime(hora_saida_string, "%H:%M")
             #debugger
             @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
@@ -114,12 +115,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "+==========================================+"
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
-            ControleVeiculos.pausa
             #debugger
             ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
         else
-            #ControleVeiculos.veiculo_nao_encontrado
-           # puts "Veículo de placa #{placa} não encontrado!"
             print "Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)"
             opcao = gets.to_s.upcase.strip
 
@@ -157,29 +155,56 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
     def self.relatorio
         #debugger
-        puts "Placa\tNome do Veículo\tDono do Veículo\tHora de Entrada\tHora de Saída\tTotal a Pagar"
-        puts "========================================================================================="
-        
-        # @@veiculos.each do |placa, dados|
-        #     printf("%s\t%s\t%s\t%s\t%s\t%.2f\n", placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:valor] ? dados[:valor] : 0)
-        # end
+        system 'clear'
+        # Define as larguras máximas de cada coluna
+        placa_width = 5
+        nome_veiculo_width = 20
+        dono_do_veiculo_width = 20
+        hora_entrada_width = 22
+        hora_saida_width = 22
+        total_a_pagar_width = 14
 
-        @@veiculos.each do |veiculo|
-            puts "#{veiculo['placa']}\t#{veiculo['nome_veiculo']}\t#{veiculo['dono_do_veiculo']}\t#{veiculo['hora_entrada']}\t#{veiculo['hora_saida']}\t#{veiculo['total_a_pagar']}"
-        end
-        ControleVeiculos.pausa
-        ControleVeiculos.pausa
+        # Cria a string de formatação
+        format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s\n"
+
+        # Imprime o cabeçalho
+        puts "======================================================================================================================"
+        puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar"]
+        puts "======================================================================================================================"
+
+        # Percorre todos os veículos e os imprime formatados
+        @@veiculos.each do |placa, dados|
+        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar])
+    end
+
+        
+        
+        # veiculo = 1
+        # veiculos = @@veiculos[veiculo]
+        # veiculos.each do |veiculo|
+        #     puts "#{veiculo['placa']}\t#{veiculo['nome_veiculo']}\t#{veiculo['dono_do_veiculo']}\t#{veiculo['hora_entrada']}\t#{veiculo['hora_saida']}\t#{veiculo['total_a_pagar']}"
+        # end
+        ControleVeiculos.volta_menu
+        # ControleVeiculos.pausa
+        # ControleVeiculos.pausa
     end
     
     def self.calculo(placa, hora_entrada, hora_saida)
         #debugger
-        puts "Essa é a placa passado por parâmetro para confirmar: #{placa}"
+        #puts "Essa é a placa passado por parâmetro para confirmar: #{placa}"
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
         @@veiculos[placa][:total_a_pagar] = resultado
         #puts "\n\nEsse é o Hash que tenho que transformar em RELATÓRIO: #{@@veiculos[placa]}."
-        puts "O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}."
-        puts "Digite (M) para o MENU principal."
+        puts "+====================================+"
+        puts "|  O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}. |"
+        puts "+====================================+"
+        ControleVeiculos.volta_menu
+        
+    end
+
+    def self.volta_menu
+        puts "\nDigite (M) para o MENU PRINCIPAL."
         opcao = gets.to_s.upcase.strip.chomp
         while opcao != "M"
             puts "\nObigatoriamente tem que digitar (M).\n\n"
@@ -188,7 +213,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         end
         opcao = "M"
         ControleVeiculos.menu
-    end
+    end    
 
     def self.pausa
         sleep(4)
