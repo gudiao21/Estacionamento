@@ -114,7 +114,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "+==========================================+"
             ControleVeiculos.pausa
             #debugger
-            ControleVeiculos.calculo(@@veiculos[placa][:hora_entrada], hora_saida)
+            ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
         else
             #ControleVeiculos.veiculo_nao_encontrado
             puts "Veículo de placa #{placa} não encontrado!"
@@ -165,15 +165,15 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.pausa
     end
     
-    def self.calculo(hora_entrada, hora_saida)
+    def self.calculo(placa, hora_entrada, hora_saida)
         #debugger
         minuto_total = ((hora_saida) - (hora_entrada))/60
         resultado = minuto_total * 0.17
-        puts "O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}."
+        puts "\nO VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}.\n\n"
         puts "Digite (M) para o MENU principal."
         opcao = gets.to_s.upcase.strip
         while opcao != "M"
-            puts "Obigatoriamente tem que digitar (M)."
+            puts "\nObigatoriamente tem que digitar (M).\n\n"
             print "Digite (M) para o MENU principal."
             opcao = gets.to_s.upcase.strip
         end
