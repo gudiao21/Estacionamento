@@ -154,7 +154,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.relatorio
-        debugger
+        #debugger
         system 'clear'
         # Define as larguras máximas de cada coluna
         placa_width = 5
@@ -166,13 +166,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         subtotal = 20
 
         # Cria a string de formatação
-        format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s\n"
+        format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotal}s\n"
 
         # Imprime o cabeçalho
         puts "======================================================================================================================"
         puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar", "Subtotal"]
         puts "======================================================================================================================"
-
+        #debugger    
+        ControleVeiculos.calcular_subtotal
         # Percorre todos os veículos e os imprime formatados
         @@veiculos.each do |placa, dados|
         printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], dados[:subtotal])
@@ -207,7 +208,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         subtotal = 0
         @@veiculos.each do |placa, dados|
         subtotal += dados[:total_a_pagar]
-        @@veiculos[placa][:subtotal] += subtotal
+        @@veiculos[placa][:subtotal] = subtotal
         end
         #return subtotal
     end
