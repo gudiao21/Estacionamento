@@ -154,7 +154,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
 
     def self.relatorio
-        #debugger
+        debugger
         system 'clear'
         # Define as larguras máximas de cada coluna
         placa_width = 5
@@ -163,18 +163,19 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         hora_entrada_width = 22
         hora_saida_width = 22
         total_a_pagar_width = 14
+        subtotal = 20
 
         # Cria a string de formatação
         format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s\n"
 
         # Imprime o cabeçalho
         puts "======================================================================================================================"
-        puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar"]
+        puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar", "Subtotal"]
         puts "======================================================================================================================"
 
         # Percorre todos os veículos e os imprime formatados
         @@veiculos.each do |placa, dados|
-        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar])
+        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], dados[:subtotal])
     end
 
         
@@ -201,6 +202,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "+====================================+"
         ControleVeiculos.volta_menu
     end
+
+    def self.calcular_subtotal
+        subtotal = 0
+        @@veiculos.each do |placa, dados|
+        subtotal += dados[:total_a_pagar]
+        @@veiculos[placa][:subtotal] += subtotal
+        end
+        #return subtotal
+    end
+      
 
     def self.volta_menu
         puts "\nDigite (M) para o MENU PRINCIPAL."
