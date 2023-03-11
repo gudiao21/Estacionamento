@@ -6,7 +6,7 @@ require 'pastel'
 #debugger
 class Veiculo
         
-    def mostrar_entrada_saida(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida, total_a_pagar) #Método para cada veículo.
+    def mostrar_entrada_saida(placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida) #Método para cada veículo.
         system 'clear'
         #debugger
         puts "Placa do carro é #{placa}."
@@ -192,10 +192,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     def self.calculo(placa, hora_entrada, hora_saida)
         #debugger
         #puts "Essa é a placa passado por parâmetro para confirmar: #{placa}"
-        minuto_total = ((hora_saida) - (hora_entrada))/60
+        minuto_total = ((hora_saida) - (hora_entrada)) / 60
         resultado = minuto_total * 0.17
         @@veiculos[placa][:total_a_pagar] = resultado
+        subtotal += resultado
+        @@veiculos[placa][:subtotal] = subtotal
         #puts "\n\nEsse é o Hash que tenho que transformar em RELATÓRIO: #{@@veiculos[placa]}."
+        puts "O SUBTOTAL É: #{subtotal}."
         puts "+====================================+"
         puts "|  O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}. |"
         puts "+====================================+"
