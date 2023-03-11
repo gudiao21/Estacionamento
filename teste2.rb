@@ -195,15 +195,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         minuto_total = ((hora_saida) - (hora_entrada)) / 60
         resultado = minuto_total * 0.17
         @@veiculos[placa][:total_a_pagar] = resultado
-        subtotal += resultado
-        @@veiculos[placa][:subtotal] = subtotal
         #puts "\n\nEsse é o Hash que tenho que transformar em RELATÓRIO: #{@@veiculos[placa]}."
-        puts "O SUBTOTAL É: #{subtotal}."
         puts "+====================================+"
         puts "|  O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}. |"
         puts "+====================================+"
         ControleVeiculos.volta_menu
-        
     end
 
     def self.volta_menu
