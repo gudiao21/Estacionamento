@@ -78,11 +78,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip.chomp
-        if @novo_veiculo[:placa] = nil
-            @novo_veiculo[:placa] = gets.to_s.strip.chomp
+        if @novo_veiculo.tem_chave?(placa)
+            puts "Essa placa #{placa} já foi cadastrada!"
                       
-        else @veiculos[placa]?(placa)
-            puts "Essa placa #{@veiculo[:placa]} já foi cadastrada!"
+        else
+            @novo_veiculo[:placa] = placa
         end    
         print "Digite o nome do veículo: "
         @novo_veiculo[:nome_veiculo] = gets.to_s.strip.chomp
@@ -95,8 +95,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
         puts "+==========================================+"
         ControleVeiculos.volta_menu
-        # ControleVeiculos.pausa
-        # ControleVeiculos.menu
     end
 
     def self.cadastrar_saida
