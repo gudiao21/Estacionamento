@@ -77,7 +77,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "\n|----- Voce escolheu a opção: (1)CADASTRAR ENTRADA DO VEÍCULO -----|\n\n"
         @novo_veiculo = {}
         print "Digite a placa do veiculo: "
-        @novo_veiculo[:placa] = gets.to_s.chomp.strip
+        placa = gets.to_s.strip.chomp
+        if @novo_veiculo[:placa] = nil
+            @novo_veiculo[:placa] = gets.to_s.strip.chomp
+                      
+        else @veiculos[placa]?(placa)
+            puts "Essa placa #{@veiculo[:placa]} já foi cadastrada!"
+        end    
         print "Digite o nome do veículo: "
         @novo_veiculo[:nome_veiculo] = gets.to_s.strip.chomp
         print "Digite o nome do proprietário do veículo: "
@@ -107,11 +113,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             #debugger
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
-            #puts "Hora de saída digitado: (#{hora_saida_string})."
             hora_saida = Time.strptime(hora_saida_string, "%H:%M")
             #debugger
             @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
-            #@@veiculos[@novo_veiculo[:placa]][:hora_saida] = hora_saida
             puts "+==========================================+"
             puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
             puts "+==========================================+"
@@ -160,23 +164,23 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa_width = 5
         nome_veiculo_width = 20
         dono_do_veiculo_width = 20
-        hora_entrada_width = 22
-        hora_saida_width = 22
+        hora_entrada_width = 32
+        hora_saida_width = 32
         total_a_pagar_width = 14
-        subtotal = 20
+        subtotais = 50
 
         # Cria a string de formatação
-        format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotal}s\n"
+        format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotais}s\n"
 
         # Imprime o cabeçalho
-        puts "======================================================================================================================"
-        puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar", "Subtotal"]
-        puts "======================================================================================================================"
+        puts "====================================================================================================================================================="
+        puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar", "Subtotais"]
+        puts "====================================================================================================================================================="
         #debugger    
         ControleVeiculos.calcular_subtotal
         # Percorre todos os veículos e os imprime formatados
         @@veiculos.each do |placa, dados|
-        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], dados[:subtotal])
+        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], "%.2f" % dados[:subtotal])
     end
 
         
