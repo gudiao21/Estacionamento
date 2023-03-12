@@ -76,16 +76,17 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         system 'clear'
         puts "\n|----- Voce escolheu a opção: (1)CADASTRAR ENTRADA DO VEÍCULO -----|\n\n"
         @novo_veiculo = {}
-        print "Digite a placa do veiculo: "
-        placa = gets.to_s.strip.chomp
+        placa = ""
+        while placa.empty?
+            system 'clear'
+            print "Digite a placa (obrigatório):  "
+            placa = gets.to_s.strip.chomp
+            
+        end
+          
         if @@veiculos.has_key?(placa)
             puts "Essa placa (#{placa}) já foi cadastrada!"
             ControleVeiculos.volta_menu
-        elsif
-            while (placa == nil)
-                print "Você deve entrar com a placa do veículo! Digite a: "
-                placa = gets.to_s.strip.chomp
-            end
         else
             @novo_veiculo[:placa] = placa
         end
