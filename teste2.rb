@@ -115,8 +115,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             print "Hora de entrada inválida, tente novamente: "
             retry
         end
-        @novo_veiculo[:hora_entrada] = hora_entrada
-        
+                
         @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
         puts "+==========================================+"
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
@@ -134,9 +133,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         if @@veiculos.key?(placa)
             #debugger
             print "Digite a hora de saída do veículo: "
-            hora_saida_string = gets.chomp
-            hora_saida = Time.strptime(hora_saida_string, "%H:%M")
-            hora_saida = Time.parse()
+            hora_saida_string = gets.to_s.strip.chomp
+            #hora_saida = Time.strptime(hora_saida_string, "%H:%M")
+            hora_saida = Time.parse(hora_saida_string)
             #debugger
             @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
             puts "+==========================================+"
@@ -176,7 +175,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa = gets.strip
         if @@veiculos.key?(placa) #Se "placa" já estiver sendo usada como chave em @@veiculos, o que indica que um veículo com essa placa já foi cadastrado.
             veiculo = @@veiculos[placa]
-            puts "Veículo de placa #{veiculo[:placa]} encontrado:"
+            puts "Veículo de placa #{veiculo[:placa]} encontrado!"
             Veiculo.new.mostrar_entrada_saida(veiculo[:placa], veiculo[:nome_veiculo], veiculo[:dono_do_veiculo], veiculo[:hora_entrada], veiculo[:hora_saida])
         else
             puts "Veículo de placa #{veiculo} não encontrado!"
