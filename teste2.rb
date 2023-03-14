@@ -204,9 +204,17 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "====================================================================================================================================================="
         #debugger    
         ControleVeiculos.calcular_subtotal
-        # Percorre todos os veículos e os imprime formatados
+        # Percorre todos os veículos e os imprime formatados:
         @@veiculos.each do |placa, dados|
-        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], "%.2f" % dados[:subtotal])
+        # Substitui valores nulos ou vazios por uma string vazia:    
+        placa = placa.nil? ? "" : placa
+        nome_veiculo = dados[:nome_veiculo].nil? ? "" : dados[:nome_veiculo]
+        dono_do_veiculo = dados[:dono_do_veiculo].nil? ? "" : dados[:dono_do_veiculo]
+        hora_entrada = dados[:hora_entrada].nil? ? "" : dados[:hora_entrada]
+        hora_saida = dados[:hora_saida].nil? ? "" : dados[:hora_saida]
+        total_a_pagar = dados[:total_a_pagar].nil? ? "" : "%.2f" % dados[:total_a_pagar]
+        subtotal = dados[:subtotal].nil? ? "" : "%.2f" % dados[:subtotal]
+        printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : 0, dados[:subtotal] ? ("%.2f" % dados[:subtotal]) : 0)
     end
         ControleVeiculos.volta_menu
     end
@@ -225,7 +233,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     def self.calcular_subtotal
         subtotal = 0
         @@veiculos.each do |placa, dados|
-        subtotal += dados[:total_a_pagar]
+        subtotal += dados[:total_a_pagar] || 0
         @@veiculos[placa][:subtotal] = subtotal
         end
    end
