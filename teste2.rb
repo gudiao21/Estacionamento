@@ -72,7 +72,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
         
     def self.cadastrar_entrada
-        #debugger
+        debugger
         system 'clear'
         puts "\n|----- Voce escolheu a opção: (1)CADASTRAR ENTRADA DO VEÍCULO -----|\n\n"
         @novo_veiculo = {}
@@ -81,7 +81,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             system 'clear'
             print "Digite a placa (obrigatório):  "
             placa = gets.to_s.strip.chomp
-            
         end
           
         if @@veiculos.has_key?(placa)
@@ -90,10 +89,19 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         else
             @novo_veiculo[:placa] = placa
         end
+        
         print "Digite o nome do veículo: "
-        @novo_veiculo[:nome_veiculo] = gets.to_s.strip.chomp
+        while (nome_veiculo = gets.to_s.strip).empty?
+            print "Proibido o campo vazio, digite novamente:   "
+        end
+        @novo_veiculo[:nome_veiculo] = nome_veiculo
+        
         print "Digite o nome do proprietário do veículo: "
-        @novo_veiculo[:dono_do_veiculo] = gets.to_s.chomp
+        while (dono_do_veiculo = gets.to_s.strip).empty?
+            print "Nome do veículo não pode ser vazio, digite novamente:   "
+        end
+        @novo_veiculo[:dono_do_veiculo] = dono_do_veiculo
+        
         print "Digite a hora de entrada do veículo: "
         @novo_veiculo[:hora_entrada] = Time.parse(gets.chomp)
         @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
