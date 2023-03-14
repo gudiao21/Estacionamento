@@ -136,6 +136,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             print "Digite a hora de saída do veículo: "
             hora_saida_string = gets.chomp
             hora_saida = Time.strptime(hora_saida_string, "%H:%M")
+            hora_saida = Time.parse()
             #debugger
             @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
             puts "+==========================================+"
@@ -145,8 +146,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
         else
             puts "\n\n"
-            puts "A placa (#{placa}) ainda não foi cadastrada."
-            print "Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)"
+            puts "+-----------------------------------------------------------------+"
+            puts "|        A placa (#{placa}) ainda não foi cadastrada.             |"
+            puts "| Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)  |"
+            puts "|                                                                 |"
+            puts "+-----------------------------------------------------------------+"
             opcao = gets.to_s.upcase.strip
 
             case opcao
@@ -159,7 +163,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
                 puts "(S) ou (N) não escolhida, por isso te redirecionaremos para a opção do MENU!"
                 ControleVeiculos.pausa
                 ControleVeiculos.menu
-            end    
+            end
           
         end
     end
@@ -177,7 +181,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         else
             puts "Veículo de placa #{veiculo} não encontrado!"
         end
-        pausa
+        ControleVeiculos.volta_menu
     end
 
     def self.relatorio
@@ -205,26 +209,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         @@veiculos.each do |placa, dados|
         printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], "%.2f" % dados[:total_a_pagar], "%.2f" % dados[:subtotal])
     end
-
-        
-        
-        # veiculo = 1
-        # veiculos = @@veiculos[veiculo]
-        # veiculos.each do |veiculo|
-        #     puts "#{veiculo['placa']}\t#{veiculo['nome_veiculo']}\t#{veiculo['dono_do_veiculo']}\t#{veiculo['hora_entrada']}\t#{veiculo['hora_saida']}\t#{veiculo['total_a_pagar']}"
-        # end
         ControleVeiculos.volta_menu
-        # ControleVeiculos.pausa
-        # ControleVeiculos.pausa
     end
     
     def self.calculo(placa, hora_entrada, hora_saida)
         #debugger
-        #puts "Essa é a placa passado por parâmetro para confirmar: #{placa}"
         minuto_total = ((hora_saida) - (hora_entrada)) / 60
         resultado = minuto_total * 0.17
         @@veiculos[placa][:total_a_pagar] = resultado
-        #puts "\n\nEsse é o Hash que tenho que transformar em RELATÓRIO: #{@@veiculos[placa]}."
         puts "+====================================+"
         puts "|  O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}. |"
         puts "+====================================+"
@@ -237,8 +229,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         subtotal += dados[:total_a_pagar]
         @@veiculos[placa][:subtotal] = subtotal
         end
-        #return subtotal
-    end
+   end
       
 
     def self.volta_menu
