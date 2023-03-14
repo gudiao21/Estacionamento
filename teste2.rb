@@ -82,7 +82,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         while (placa = gets.to_s.strip).empty?
             system 'clear'
             print "A placa do veículo não pode ser vazia, digite novamente: "
-            #placa = gets.to_s.strip.chomp
         end
           
         if @@veiculos.has_key?(placa)
@@ -104,14 +103,20 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         end
         @novo_veiculo[:dono_do_veiculo] = dono_do_veiculo
         
-        print "Digite a hora de entrada do veículo: "
-        hora_entrada = nil
-        while (hora_entrada = Time.parse(gets.to_s.strip)).nil?
-            print "Hora de entrada não pode ser vazia, digite novamente (formato: HH:MM): "
+        print "Digite a hora de entrada do veículo (formato: HH:MM): "
+        hora_entrada = gets.to_s.strip.chomp
+        until (hora_entrada).match?(/^\d{2}:\d{2}$/)
+            print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
+            hora_entrada = gets.to_s.strip.chomp
+        end
+        begin
+            @novo_veiculo[:hora_entrada] = Time.parse(hora_entrada)
+        rescue ArgumentError
+            print "Hora de entrada inválida, tente novamente: "
+            retry
         end
         @novo_veiculo[:hora_entrada] = hora_entrada
         
-        #@novo_veiculo[:hora_entrada] = Time.parse(gets.chomp)
         @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
         puts "+==========================================+"
         puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
@@ -125,9 +130,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "\n|----- Voce escolheu a opção: (2)CADASTRAR SAÍDA DO VEÍCULO -----|\n\n"
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
-        
-        puts "Você acabou de digitar (#{placa}) para a placa do veículo."
-      
         #debugger
         if @@veiculos.key?(placa)
             #debugger
@@ -142,6 +144,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             #debugger
             ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
         else
+            puts "\n\n"
+            puts "A placa (#{placa}) ainda não foi cadastrada."
             print "Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)"
             opcao = gets.to_s.upcase.strip
 
@@ -174,7 +178,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "Veículo de placa #{veiculo} não encontrado!"
         end
         pausa
-
     end
 
     def self.relatorio
@@ -239,11 +242,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       
 
     def self.volta_menu
-        puts "\nDigite (M) para o MENU PRINCIPAL."
+        puts "+---------------------------------------------+"
+        puts "|  Digite (M) para voltar ao MENU PRINCIPAL.  |"
+        puts "+---------------------------------------------+"
         opcao = gets.to_s.upcase.strip.chomp
         while opcao != "M"
-            puts "\nObigatoriamente tem que digitar (M).\n\n"
-            print "Digite (M) para o MENU principal."
+            system 'clear'
+            puts "+-------------------------------------+"
+            puts "|Obrigatoriamente tem que digitar (M).|"
+            puts "|  Digite (M) para o MENU principal.  |"
+            puts "+-------------------------------------+"
             opcao = gets.to_s.upcase.strip.chomp
         end
         opcao = "M"
