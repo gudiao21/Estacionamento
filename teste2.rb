@@ -22,7 +22,7 @@ class Veiculo
         end
         ControleVeiculos.volta_menu
     end
-    dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : ""
+    #dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : ""
 end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
