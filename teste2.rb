@@ -20,9 +20,9 @@ class Veiculo
             puts "A hora de saída foi #{hora_saida}."
             puts "=================================================="
         end
-        ControleVeiculos.pausa
+        ControleVeiculos.volta_menu
     end
-
+    dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : ""
 end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
@@ -88,6 +88,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "Essa placa (#{placa}) já foi cadastrada!"
             ControleVeiculos.volta_menu
         else
+            @@veiculos[:total_a_pagar] ? ("%.2f" % @@veiculos[:total_a_pagar]) : ""
             @novo_veiculo[:placa] = placa
         end
         
