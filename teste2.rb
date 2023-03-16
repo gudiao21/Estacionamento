@@ -1,7 +1,7 @@
-require 'time'
-require 'byebug'
-require 'term/ansicolor'
-require 'pastel'
+#require 'time'
+#require 'byebug'
+#require 'term/ansicolor'
+#require 'pastel'
 
 #debugger
 class Veiculo
