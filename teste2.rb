@@ -110,7 +110,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
             hora_entrada = gets.to_s.strip.chomp
         end
-        
+        #debugger
+        @novo_veiculo[:hora_entrada] = hora_entrada
+        #@@veiculos[placa][:hora_entrada] = hora_entrada
         begin
             #@novo_veiculo[:hora_entrada] = DateTime.parse(hora_entrada).to_time
 
@@ -136,10 +138,24 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         
         if @@veiculos.key?(placa)
             #debugger
-            print "Digite a hora de saída do veículo: "
-            hora_saida_string = gets.to_s.strip.chomp
+            @novo_veiculo = @@veiculos[placa]
+            hora_saida = nil
+            
+            print "Digite a hora de saída do veículo (formato: HH:MM): "
+            hora_saida = gets.to_s.strip.chomp
+            until (hora_saida).match?(/^\d{2}:\d{2}$/)
+                print "Hora de saída inválida, digite novamente (formato: HH:MM): "
+                hora_saida = gets.to_s.strip.chomp
+            end
+            begin
+                @novo_veiculo[:hora_saida] = DateTime.parse(hora_saida).to_time
+    
+            rescue ArgumentError
+                print "Hora de saída inválida, tente novamente: "
+                retry
+            end
             #hora_saida = Time.strptime(hora_saida_string, "%H:%M")
-            hora_saida = Time.parse(hora_saida_string)
+            #hora_saida = Time.parse(hora_saida_string)
             #debugger
             @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
             puts "+==========================================+"
@@ -224,7 +240,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
     
     def self.calculo(placa, hora_entrada, hora_saida)
-        #debugger
+        debugger
+        hora_entrada = Time.strptime(hora_entrada, "%H:%M")
+        hora_saida = Time.strptime(hora_saida, "%H:%M")
         minuto_total = ((hora_saida) - (hora_entrada)) / 60
         resultado = minuto_total * 0.17
         @@veiculos[placa][:total_a_pagar] = resultado
