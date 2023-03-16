@@ -1,7 +1,10 @@
-require 'time'
-require 'byebug'
-require 'term/ansicolor'
-require 'pastel'
+
+
+#require 'time'
+#require 'byebug'
+#require 'term/ansicolor'
+#require 'pastel'
+
 
 #debugger
 class Veiculo
@@ -292,3 +295,5 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 end
 
 ControleVeiculos.init
+
+kjjkfdsjkhfdsfkjdsjkdfdfdsfdsfsdfdsfdsfdsf
