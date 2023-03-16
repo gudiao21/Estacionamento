@@ -1,7 +1,7 @@
-#require 'time'
-#require 'byebug'
-#require 'term/ansicolor'
-#require 'pastel'
+require 'time'
+require 'byebug'
+require 'term/ansicolor'
+require 'pastel'
 
 #debugger
 class Veiculo
@@ -103,15 +103,17 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             print "Nome do dono do veículo não pode ser vazio, digite novamente: "
         end
         @novo_veiculo[:dono_do_veiculo] = dono_do_veiculo
-        
+        #debugger
         print "Digite a hora de entrada do veículo (formato: HH:MM): "
         hora_entrada = gets.to_s.strip.chomp
         until (hora_entrada).match?(/^\d{2}:\d{2}$/)
             print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
             hora_entrada = gets.to_s.strip.chomp
         end
+        
         begin
-            @novo_veiculo[:hora_entrada] = Time.parse(hora_entrada)
+            #@novo_veiculo[:hora_entrada] = DateTime.parse(hora_entrada).to_time
+
         rescue ArgumentError
             print "Hora de entrada inválida, tente novamente: "
             retry
@@ -131,6 +133,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
         #debugger
+        
         if @@veiculos.key?(placa)
             #debugger
             print "Digite a hora de saída do veículo: "
