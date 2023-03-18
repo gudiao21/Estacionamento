@@ -177,9 +177,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "| Deseja ir para a opção: (1)CADASTRAR ENTRADA DE VEÍCULO? (S/N)  |"
             puts "|                                                                 |"
             puts "+-----------------------------------------------------------------+"
-            opcao = gets.to_s.upcase.strip
+            escolha = gets.to_s.upcase.strip
 
-            case opcao
+            case escolha
             when "S"
                 ControleVeiculos.cadastrar_entrada
             when "N"
@@ -272,16 +272,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "+---------------------------------------------+"
         puts "|  Digite (M) para voltar ao MENU PRINCIPAL.  |"
         puts "+---------------------------------------------+"
-        opcao = gets.to_s.upcase.strip.chomp
-        while opcao != "M"
+        decisao = gets.to_s.upcase.strip.chomp
+        while decisao != "M"
             system 'clear'
             puts "+-------------------------------------+"
             puts "|Obrigatoriamente tem que digitar (M).|"
             puts "|  Digite (M) para o MENU principal.  |"
             puts "+-------------------------------------+"
-            opcao = gets.to_s.upcase.strip.chomp
+            decisao = gets.to_s.upcase.strip.chomp
         end
-        opcao = "M"
+        decisao = "M"
         ControleVeiculos.menu
     end    
 
@@ -291,8 +291,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     
     def self.init
         while(true)
-          opcao = ControleVeiculos.menu
-          break if opcao == SAIR_DO_SISTEMA
+            choice = ControleVeiculos.menu
+          break if choice == SAIR_DO_SISTEMA
         end
     end
 
