@@ -137,7 +137,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         placa = gets.to_s.strip
         #debugger
 
-        debugger
+        #debugger
         if @@veiculos.key?(placa) && @@veiculos[placa][:hora_saida].nil?
             #debugger
             @novo_veiculo = @@veiculos[placa]
