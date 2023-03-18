@@ -1,7 +1,7 @@
 require 'time'
 require 'byebug'
-require 'term/ansicolor'
-require 'pastel'
+#require 'term/ansicolor'
+#require 'pastel'
 
 
 #debugger
@@ -136,12 +136,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         print "Digite a placa do veiculo: "
         placa = gets.to_s.strip
         #debugger
-        
-        if @@veiculos.key?(placa)
+
+        debugger
+        if @@veiculos.key?(placa) && @@veiculos[placa][:hora_saida].nil?
             #debugger
             @novo_veiculo = @@veiculos[placa]
             hora_saida = nil
-            
+
             print "Digite a hora de saída do veículo (formato: HH:MM): "
             hora_saida = gets.to_s.strip.chomp
             until (hora_saida).match?(/^\d{2}:\d{2}$/)
@@ -164,6 +165,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
             puts "+==========================================+"
             #debugger
             ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
+
+        elsif @@veiculos.key?(placa) && @@veiculos[placa][:hora_saida]
+            puts "Hora de saída já registrada para essa placa!"
+            ControleVeiculos.volta_menu
+
         else
             puts "\n\n"
             puts "+-----------------------------------------------------------------+"

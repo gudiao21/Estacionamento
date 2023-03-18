@@ -1,9 +1,8 @@
 require 'byebug'
-debugger
+#debugger
 
-#source 'https://rubygems.org'
-#source 'https://gems.github.com'
-source 'http://mygemserver.com'
+
+source 'https://rubygems.org'
 
 gem 'byebug'
 
