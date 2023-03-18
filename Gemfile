@@ -1,10 +1,14 @@
-ruby '3.0.0'
+require 'byebug'
+debugger
 
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+#source 'https://gems.github.com'
+source 'http://mygemserver.com'
 
 gem 'byebug'
 
-gem 'term-ansicolor-1.7.1'
+gem 'rubocop', group: 'development'
+gem 'term/ansicolor'
 
-#gem 'pastel'
+gem 'pastel'
 
