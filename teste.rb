@@ -32,6 +32,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
   @@veiculos = {}
 
+  def self.objeto_json
+    json_veiculos = JSON.generate(@@veiculos)
+    File.write('veiculos.json', json_veiculos)
+    puts File.read('veiculos.json')
+  end
+
   def initialize
     @veiculos = {}
     @novo_veiculo = {}
@@ -127,6 +133,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     puts "+==========================================+"
     puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
     puts "+==========================================+"
+    ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -143,6 +150,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       #debugger
       @novo_veiculo = @@veiculos[placa]
       hora_saida = nil
+      ControleVeiculos.objeto_json
 
       print "Digite a hora de saída do veículo (formato: HH:MM): "
       hora_saida = gets.to_s.strip.chomp
@@ -244,6 +252,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       subtotal = dados[:subtotal].nil? ? "" : "%.2f" % dados[:subtotal]
       printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : 0, dados[:subtotal] ? ("%.2f" % dados[:subtotal]) : 0)
     end
+    ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -257,6 +266,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     puts "+====================================+"
     puts "|  O VALOR TOTAL A PAGAR É: #{sprintf('R$ %.2f', resultado)}. |"
     puts "+====================================+"
+    ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -265,6 +275,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     @@veiculos.each do |placa, dados|
       subtotal += dados[:total_a_pagar] || 0
       @@veiculos[placa][:subtotal] = subtotal
+      ControleVeiculos.objeto_json
     end
   end
 
@@ -288,15 +299,4 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
   def self.pausa
     sleep(4)
-  end
-
-  def self.init
-    while(true)
-      choice = ControleVeiculos.menu
-      break if choice == SAIR_DO_SISTEMA
-    end
-  end
-
-end
-
-ControleVeiculos.init
+  
