@@ -3,4 +3,29 @@
   <component name="ModuleRunConfigurationManager">
     <shared />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/features" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+    </content>
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="RVM: ruby-3.0.0" jdkType="RUBY_SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.6, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pastel (v0.8.0, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-color (v0.6.0, RVM: ruby-3.0.0) [gem]" level="application" />
+=======
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.6, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pastel (v0.8.0, RVM: ruby-2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-color (v0.6.0, RVM: ruby-2.6.5) [gem]" level="application" />
+>>>>>>> 6bc8606bea14ffb2d022b13e8d4f9d9234b00a05
+  </component>
+>>>>>>> 9e1be258c8ac79400ef92cf5553e892a0200b376
 </module>
