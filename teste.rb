@@ -1,8 +1,8 @@
 require 'time'
 require 'byebug'
 require 'json'
-require 'term/ansicolor'
-require 'pastel'
+#require 'term/ansicolor'
+#require 'pastel'
 
 
 #debugger
@@ -299,5 +299,16 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
 
   def self.pausa
     sleep(4)
+  end
 
-    #lascou
+  def self.init
+    while(true)
+      choice = ControleVeiculos.menu
+      break if choice == SAIR_DO_SISTEMA
+    end
+  end
+
+end
+
+ControleVeiculos.init
+    #lascou2
