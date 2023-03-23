@@ -11,3 +11,5 @@ gem 'rubocop', group: 'development'
 gem 'term/ansicolor'
 
 gem 'pastel'
+
+source /usr/local/rvm/scripts/rvm

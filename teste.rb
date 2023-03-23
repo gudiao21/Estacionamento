@@ -35,7 +35,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
   def self.objeto_json
     json_veiculos = JSON.generate(@@veiculos)
     File.write('veiculos.json', json_veiculos)
-    puts File.read('veiculos.json')
+    puts "Veículo(s) registrado(s):\n#{json_veiculos}"
   end
 
   def initialize
@@ -150,7 +150,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       #debugger
       @novo_veiculo = @@veiculos[placa]
       hora_saida = nil
-      ControleVeiculos.objeto_json
 
       print "Digite a hora de saída do veículo (formato: HH:MM): "
       hora_saida = gets.to_s.strip.chomp
@@ -172,6 +171,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       puts "+==========================================+"
       puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
       puts "+==========================================+"
+      ControleVeiculos.objeto_json
       #debugger
       ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
 
@@ -229,10 +229,10 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     hora_entrada_width = 32
     hora_saida_width = 32
     total_a_pagar_width = 14
-    subtotais = 50
+    subtotais_width = 50
 
     # Cria a string de formatação
-    format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotais}s\n"
+    format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotais_width}s\n"
 
     # Imprime o cabeçalho
     puts "====================================================================================================================================================="
@@ -252,7 +252,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       subtotal = dados[:subtotal].nil? ? "" : "%.2f" % dados[:subtotal]
       printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : 0, dados[:subtotal] ? ("%.2f" % dados[:subtotal]) : 0)
     end
-    ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -308,6 +307,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
   end
 
-end
+ end
 
-#
+ControleVeiculos.init
+
+jkkjklhjkhlhjkhjkhlkjhjkhlkhkljhhhjjhghjgjkjhjhjjhghjjhgghhhjggghgjhkgggjkgjgjgjggjkggkggjgkghgghhkgghghgghghjggghjgjgkghjgjkgghjgkjhghjghjghjkjggjgjgjkghghkggghkkghhkghkghkghkhhgkghghhgkgkgkhgkhghgkkhgkhgghkghgghgghghgghghghjghgghkghggghjggjjhjgjhhjghghjkghjghgkghhjhhghhhghkhkkkkhghgjhggghhgggggjkkghghghhhjhghjhhhkhhhkhkhhhhhkkkkhjhkkhjkjhhhjhjhjhjgdasfsdafsdaffasffsdsfdffsfdsfffffdsfffffffffffffffdsdfadssdfsdafsdfsfdsfsdfdsfdsfdsfsfsfdaflçjlkjlkjkljkljkljklçjklkljkljkljklçlkçjkljjlçkjlkçkjljlkjklçlkjklkllkkklçlçkçkjjlçlklçjlkjlçjlkjlkçlkjkljçljklkljklçkljkljkljlçjçlkljjlçlçljljkllkçjklkllçklklklklklkljkljklkçljlkkkljklkkjkljljkçjlkjlçkjlkjkjlçjkjjkjkjkçjjçjjkçjkkljkkjkjkjklçjçljklçjçjkkççjjjçjçkkjçjjçjjjçjkjçjçjçççjjjççjçjçklçjjçççjçjççççççççççççjkkçljkkjlkljkçjkjçljjjçjjjçjjçjjjçjjjkçjkjkçkklçkkkkklkklçjkllçlçlçklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllklçjkljlklçjkklçjjkllkljçjklkçklkljklçklkçlkçkjlçjlçjçkkjçlkçlkkkkkkkkkkkkkkkkkkkkkkkkkkkkjkljklçkkçklkkkçlkkllkkçklkjjçkçjjkçjçjjlkçkjlçklkçklçlkçkçkkljçjdsafsdafdsafsdfsdfdsafsafsdsdffsfsdfsssssssssssfdsasfssdfsdsfdsafdsfsddsfffsaasfsafsffsfdfdsfasdfsssfdsfsadsffsdsaaafasfdffsafsdssfsfsdfsfsssfsdfafkjjkjkjkljljkjjjjlçjklklkjçllçjljjjlçkljlklçklklkllklçklkljkjlklkklklhkjhjhhkjklkjhkjhkjhkjhkjhkjhjkhkjkjhjkhhjjkhjkkjjlhjljkhjkjkklkklkkkkjhhjkjjkkljoiuoiuououoiuoiuououoiuiopoiuoiuopupouopupoopupopopuopoouuioouupupiupupopoppppuiupuupppppppppppppppppppppppgjhgjkjpppppppppppppppuppljljlçjjljjlçljljlçjlkljlgjgjgjkggjgjhggjhjjgghjhhjghjjhghhjhhghhjhgkkkggkkhkhgghhgkhghhhjkhhgjkhhhhkhggkjggkhjgghkgkhjkjgkgkkkkgkkkkgkjhkkkjkjkjjjkjkjkggjjkjjhgjjkghkhgjhjkgkhkhkkjhhghkghgggkgghkggjkhgjgjggjhgkggjkggjjhhgggkghjghgkggkhjkjggggggggggkhgghkgggkjghjgggkgghkgkggkggggkggkjgkgggjggjkkkkhhggghkjhgghhkjghgkkkkhkgkggkkhkhhkhgkhhgkkghjhhjhhhkhjjgkkhkkkkjkhkggkkkgkhkkghkkkhhjkgjkjhghjhjkhjhghjjhjjkhhjkjhjhghhgjkhgjhgjhgjkghjgkgjhghjghjgjhgkghjghjgjghkjghjghjgjhgjkggkghgkggkgghjhgjkhjkkkghhkjkjjhgggkjhjkjjhgjhghggghjhhjhjghjhhjjhjhhgjhjhjjhjhhjjjhjhjhjhjkgjhghjhhjghjhjgjkjjhggkgjhjhjkghhjjhjhjhjhhjjhjhhjhhjkjhjkhjhjjjhkjkjjhhhjhjhjhjhjhjjjjhjjjjjjjjjjjjjjhhkghjhjghjkhghjgghjghjhjkjkhhgjghjkjjhghjghjkghghkjgjhhjghjjggjkghjhjghjghjgjkghjgjhghjgjkghjgjhghjghghjkgjhghjghjghjgkjhjhgjgjgjkghjkgjhgkjhhjjjhkgjhhjghjkgjghjgkjghjgghjjhhgjhgjhghjgkgjhghjhjkgjhghjgkghjgjhkgjghhjgkghjkghkjggjhjhghjghjghgjhjjjhkhjghjhjghjhjjhjhjhjjjhjhjhjjhhjhjjhjhhhkkhkhkhkhgggkggjgjgkgkkgkggkkhkjgjhjkkkkkgkkgkgjkhghhkkjhkkhjjhhjkjhkjhkgggggggjkghgjkjghjjjjhjhjhjhjhjkhhjhjjhjhjjhhjhjjhjhjjghjjhjhjhhjghkghghgkjhjghjghjgjhjhjhgjhggjkjjgjkjhgjgjhjjhggjhgjhgjgjjkjjkgjjhjjkjgjhgjjjgjkjjhkjjhgjhkgjhjhgjhgjhghkjhjhjhjjjgjhhjjjjjhjhjhkjhkgjhgjhkgjjhgkgjhgjjjjgjkjgjkgkjkkkjjkgkgjhgjghgjkghjkgjgjhgjhkgjgjhkghjghjjhjhjkhhjkjkkghghjkgkkgghjkjgjhjhjjhgjjhhjjhjhjhjhjhjjhhhjhjhjjkgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjhgjkjhjhjhjhjghjkgjkjgkghjgjkjkjhhjkghjgjgjkkjhkghjgjkjghjgjhghjghjgjhkghjghjgkhjgjhkgjhkkjkhjkhjgjhkjkhgjhgjkkjjhgjhhgjghkgjhghjgjhgjgjhgjjhhjhjgjgjhghjghjgjjkjhhjhjghjghjghjgjhkkjgjhgjhgjhgjhjhghjkjhjjhhjghjkjhgjhgjhjhgjhghjghjghjhjkghjjkghjhjhjgkhjhjjhghjjhgjghjgjhghjghjgkgjhkgghjkjjjjjjjjgjhkgjhghgjghjgjjggkjjhhjghhjjhghjghjghjhjhhhjghjhgjhghjgjhgjjhjhjhhjkjhggjghjgjhjgjghjggggghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjggjhhjhjkjjhghjghjghjjkhjhhhhhgjhgkjhkghgkghgjhghjhjghggkghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgkghghkjghghggjhgjkjhghjgjhgjhgjhghjghjgjkghjghghgjhghjghghgjhgghghghgghggghghghgjkjhjjjjghjjjjjjjjjjjjhjhgjhghkjhhhhhghhhjhhhhjhhjhhghhhjhhhhjhhjhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjghkhghjjhhjhjjhjhjhhjhjhhhhjhhjhhhhjhhjhjkhjjhhjjkhjhjjjkhjhjhjhjkgghhjhhghhhhjgjgghjgghjghjgghgjhgjkjhgjgjhjjgjkjhkjghghjghjgkjhjjhhjjhkgkkghkhjhkhkhkkghkjhgjkhjhjgkkkkhghhjghjkggjkhkghkhghkkhkkkkkkkhkhkhhhhhhkhjghhjkhhjhgjkhhhkllklklçljlçjljljljjllljlljllçlkllllçllçklçjlçjçllllllllllllllllllllllllllllllllkllkllçlkjkllkllçlkjllkllkjlklkkljçjkljjklçkljjklçjçlçjjjkkçjjkkkjçlçjçççjkçkljkjkjllkçlçjjkkkjjkçljkççjjjçççkjjçjjkjkkjçjjçjççççjkçlçlkçkjkjkjljlkjkkklkjlçjkklkçççlççççjkjlkjjljklkjkjkkljkkjljllçkkljkjlçkjklçjklklllkljljlkjljllkjkjlkçkjkljkjkjkljljkklçklllçllkkllçkklçklçkkkkkkkjlklçkljllkhhhhhhhhhhkjhgkjhhhghkjhhgkkkkkkhkgkkkjljjljçkljljljçllklljkjçljjkjljkjkpppppiiiuupuuuououuouopopppppppppppppppppppppppppppppouopppipuiiuiuiuupppukjkjlkkljkjkjkjkhjjjjkjjjkjkjkhjkjkkjkhjkkjkjkhklhjhjllkjkhkjljkkljkljklhkljkhkkjhjhlkljlklçkllkkljlkjlçjljkklçkljllçççkkkçlkllkçklkçklkllçjkklklçklk
