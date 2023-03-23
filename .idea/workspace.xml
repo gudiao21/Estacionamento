@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Estacionamento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Estacionamento.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ruby-version" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Estacionamento" beforeDir="false" afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Estacionamento/.idea/Estacionamento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Estacionamento/.idea/Estacionamento.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teste.rb" beforeDir="false" afterPath="$PROJECT_DIR$/teste.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +156,7 @@
       <workItem from="1679526157341" duration="537000" />
       <workItem from="1679526713379" duration="127000" />
       <workItem from="1679526854904" duration="29000" />
-      <workItem from="1679526898449" duration="1947000" />
+      <workItem from="1679526898449" duration="2910000" />
     </task>
     <servers />
   </component>
