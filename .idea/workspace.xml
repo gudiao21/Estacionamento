@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veiculos.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +162,7 @@
       <workItem from="1679526898449" duration="4502000" />
       <workItem from="1679600680165" duration="9573000" />
       <workItem from="1679685570345" duration="1181000" />
-      <workItem from="1679686837552" duration="3635000" />
+      <workItem from="1679686837552" duration="6381000" />
     </task>
     <servers />
   </component>
