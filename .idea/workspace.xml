@@ -7,7 +7,6 @@
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veiculos.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +163,7 @@
       <workItem from="1679600680165" duration="9573000" />
       <workItem from="1679685570345" duration="1181000" />
       <workItem from="1679686837552" duration="10805000" />
-      <workItem from="1679749305871" duration="1660000" />
+      <workItem from="1679749305871" duration="3368000" />
     </task>
     <servers />
   </component>
