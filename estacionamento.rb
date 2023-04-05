@@ -1,6 +1,15 @@
 require 'time'
 require 'byebug'
 require 'json'
+require 'pg'
+
+conn = PG.connect(
+  dbname: "estacionamento",
+  user: "postgres",
+  password: "Joacira",
+  host: "localhost",
+  port: "5432"
+)
 #require 'term/ansicolor'
 #require 'pastel'
 
