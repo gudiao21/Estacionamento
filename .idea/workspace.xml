@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Estacionamento.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Estacionamento.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -251,7 +248,7 @@
       <workItem from="1680511810901" duration="15853000" />
       <workItem from="1680561464891" duration="1882000" />
       <workItem from="1680595131375" duration="21990000" />
-      <workItem from="1680639374010" duration="10107000" />
+      <workItem from="1680639374010" duration="11921000" />
     </task>
     <servers />
   </component>
