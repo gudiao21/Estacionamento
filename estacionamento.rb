@@ -2,6 +2,7 @@ require 'time'
 require 'byebug'
 require 'json'
 require 'pg'
+require 'psql'
 
 conn = PG.connect(
   dbname: "estacionamento",
