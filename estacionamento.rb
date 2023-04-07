@@ -42,9 +42,11 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
   @@veiculos = {}
 
   def self.objeto_json
+    puts "-------|Confirmação de registração em JSON|-------"
     json_veiculos = JSON.generate(@@veiculos)
     File.write('veiculos.json', json_veiculos)
     puts "Veículo(s) registrado(s):\n#{json_veiculos}"
+    puts "--------------------------------------------------"
   end
 
   def initialize
@@ -128,7 +130,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       hora_entrada = gets.to_s.strip.chomp
     end
     #debugger
-    @novo_veiculo[:hora_entrada] = hora_entrada
+    @novo_veiculo[:hora_entrada] = Time.parse(hora_entrada)
     #@@veiculos[placa][:hora_entrada] = hora_entrada
     begin
       #@novo_veiculo[:hora_entrada] = DateTime.parse(hora_entrada).to_time
@@ -137,6 +139,23 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       print "Hora de entrada inválida, tente novamente: "
       retry
     end
+
+    # abrir a conexão com o banco de dados usando biblioteca PG
+    conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
+
+    # Consulta SQL para selecionar todos os registros da tabela "estacionamento"
+    conn.prepare('select_statement', 'SELECT * FROM estacionamento')
+    #Executa a consulta e armazenamento dos resultados em uma variável.
+    result = conn.exec_prepared('select_statement')
+    # imprimir os dados na tela
+    puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
+    result.each do |row|
+      puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
+    end
+    puts "+---------------------------------------------------------------+"
+
+    # fechar a conexão
+    conn.close
 
     @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
     puts "+==========================================+"
@@ -169,12 +188,21 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       begin
         @novo_veiculo[:hora_saida] = DateTime.parse(hora_saida).to_time
 
-      rescue ArgumentError
+            rescue ArgumentError
         print "Hora de saída inválida, tente novamente: "
         retry
       end
-      #hora_saida = Time.strptime(hora_saida_string, "%H:%M")
-      #hora_saida = Time.parse(hora_saida_string)
+
+      conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
+      conn.prepare('insert_statement', 'INSERT INTO estacionamento (placa, nome_veiculo, dono_do_veiculo, hora_entrada) VALUES ($1, $2, $3, $4)')
+      conn.prepare('select_statement', 'SELECT * FROM estacionamento')
+      result = conn.exec_prepared('select_statement')
+
+      puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
+      result.each do |row|
+        puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
+      end
+      puts "+-----------------------------------------------------------------+"
       #debugger
       @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
       puts "+==========================================+"
