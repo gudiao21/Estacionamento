@@ -1,4 +1,4 @@
-require 'byebug'
+#require 'byebug'
 #debugger
 source "https://rubygems.org"
 ruby '3.0.0'
@@ -11,5 +11,6 @@ gem 'rubocop', group: 'development'
 gem 'term/ansicolor'
 
 gem 'pastel'
+gem 'pg'
 
-source /usr/local/rvm/scripts/rvm
+#source /usr/local/rvm/scripts/rvm
