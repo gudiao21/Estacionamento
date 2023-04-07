@@ -320,5 +320,3 @@ end
 
 ControleVeiculos.init
 
-#teste6
-
