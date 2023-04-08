@@ -2,7 +2,7 @@ require 'time'
 require 'byebug'
 require 'json'
 require 'pg'
-require 'psql'
+require 'database.rb'
 
 conn = PG.connect(
   dbname: "estacionamento",
@@ -150,6 +150,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     result = conn.exec_prepared('select_statement')
     # imprimir os dados na tela
     puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
+
     result.each do |row|
       puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
     end
