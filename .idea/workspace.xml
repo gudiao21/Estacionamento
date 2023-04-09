@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/veiculos.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veiculos.json" beforeDir="false" afterPath="$PROJECT_DIR$/veiculos.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +33,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1680623924" />
+                    <option name="lastUsedInstant" value="1680953442" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />

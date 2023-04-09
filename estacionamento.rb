@@ -37,17 +37,17 @@ class Veiculo
 end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
-  SAIR_DO_SISTEMA = 5
+  SAIR_DO_SISTEMA = 6
 
   @@veiculos = {}
 
-  def self.objeto_json
-    puts "-------|Confirmação de registração em JSON|-------"
-    json_veiculos = JSON.generate(@@veiculos)
-    File.write('veiculos.json', json_veiculos)
-    puts "Veículo(s) registrado(s):\n#{json_veiculos}"
-    puts "--------------------------------------------------"
-  end
+  # def self.objeto_json
+  #   puts "-------|Confirmação de registração em JSON|-------"
+  #   json_veiculos = JSON.generate(@@veiculos)
+  #   File.write('veiculos.json', json_veiculos)
+  #   puts "Veículo(s) registrado(s):\n#{json_veiculos}"
+  #   puts "--------------------------------------------------"
+  # end
 
   def initialize
     @veiculos = {}
@@ -65,7 +65,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     puts "Digite (2) para cadastrar saída do veículo."
     puts "Digite (3) para buscar veículo por placa."
     puts "Digite (4) para mostrar movimentação do dia."
-    puts "Digite (5) para sair."
+    puts "Digite (5) deletar toda base de dados do postgresql."
+    puts "Digite (6) para sair."
     puts "====================================================="
     ControleVeiculos.captura_item_menu
   end
@@ -81,6 +82,12 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       ControleVeiculos.buscar_veiculo
     when 4
       ControleVeiculos.relatorio
+    when 5
+      def delete_all_records(estacionamento)
+        conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
+        conn.exec("DELETE FROM #{estacionamento}")
+        conn.close
+      end
     when SAIR_DO_SISTEMA
       SAIR_DO_SISTEMA
     else
@@ -161,7 +168,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     puts "+==========================================+"
     puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
     puts "+==========================================+"
-    ControleVeiculos.objeto_json
+    #ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -203,12 +210,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
       end
       puts "+-----------------------------------------------------------------+"
+
       #debugger
       @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
       puts "+==========================================+"
       puts "|       SAÍDA CADASTRADA COM SUCESSO.      |"
       puts "+==========================================+"
-      ControleVeiculos.objeto_json
+      #ControleVeiculos.objeto_json
       #debugger
       ControleVeiculos.calculo(@@veiculos[placa][:placa], @@veiculos[placa][:hora_entrada], hora_saida)
 
