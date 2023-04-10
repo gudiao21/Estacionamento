@@ -2,7 +2,7 @@ require 'time'
 require 'byebug'
 require 'json'
 require 'pg'
-require 'database.rb'
+#require 'database.rb'
 
 conn = PG.connect(
   dbname: "estacionamento",
@@ -129,6 +129,10 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     until (hora_entrada).match?(/^\d{2}:\d{2}$/)
       print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
       hora_entrada = gets.to_s.strip.chomp
+      hora_entrada_objeto = Time.strptime(hora_entrada, "%H:%M") #convertido para o D
+
+      # agora você pode inserir hora_entrada_objeto no seu comando SQL
+
     end
     #debugger
     @novo_veiculo[:hora_entrada] = Time.parse(hora_entrada)
@@ -141,29 +145,36 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       retry
     end
 
-    # abrir a conexão com o banco de dados usando biblioteca PG
-    conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
+    begin
+      # Conexão com o banco de dados
+      conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: '5432')
 
-    # Consulta SQL para selecionar todos os registros da tabela "estacionamento"
-    conn.prepare('select_statement', 'SELECT * FROM estacionamento')
-    #Executa a consulta e armazenamento dos resultados em uma variável.
-    result = conn.exec_prepared('select_statement')
-    # imprimir os dados na tela
-    puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
+      # Query SQL para inserir um novo registro na tabela controle_veiculos
+      conn.exec("INSERT INTO estacionamento.controle_veiculos(placa, nome_veiculo, dono_do_veiculo, hora_entrada) VALUES ('#{placa}', '#{nome_veiculo}', '#{dono_do_veiculo}', '#{hora_entrada_objeto}');")
 
-    result.each do |row|
-      puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
+      puts "==================================================="
+
+      # Seleciona todos os registros da tabela controle_veiculos
+      result = conn.exec("SELECT * FROM estacionamento.controle_veiculos")
+
+      # Imprime os resultados no console
+      result.each do |row|
+        puts row
+      end
+      puts "===================================================="
+
+      # Fechando a conexão
+      conn.close
+
+    rescue PG::Error => e
+      puts 'Erro ao inserir o registro na tabela controle_veiculos: ' + e.message
     end
-    puts "+---------------------------------------------------------------+"
-
-    # fechar a conexão
-    conn.close
 
     @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
     puts "+==========================================+"
     puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
     puts "+==========================================+"
-    ControleVeiculos.objeto_json
+    #ControleVeiculos.objeto_json
     ControleVeiculos.volta_menu
   end
 
@@ -351,4 +362,3 @@ end
 ControleVeiculos.init
 
 #alteração1
-
