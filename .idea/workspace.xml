@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.byebug_history" beforeDir="false" afterPath="$PROJECT_DIR$/.byebug_history" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.rb" beforeDir="false" afterPath="$PROJECT_DIR$/database.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +255,9 @@
       <workItem from="1680857140120" duration="17231000" />
       <workItem from="1680908136213" duration="99000" />
       <workItem from="1680910076523" duration="3230000" />
-      <workItem from="1681074683019" duration="10672000" />
+      <workItem from="1681074683019" duration="22508000" />
+      <workItem from="1681162061489" duration="3532000" />
+      <workItem from="1681228891644" duration="12954000" />
     </task>
     <servers />
   </component>
@@ -277,7 +282,7 @@
     </ignored-roots>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Estacionamento@estacionamento.rcov" NAME="estacionamento Coverage Results" MODIFIED="1679996997246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Estacionamento" />
+    <SUITE FILE_PATH="coverage/Estacionamento@estacionamento.rcov" NAME="estacionamento Coverage Results" MODIFIED="1681161964494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Estacionamento" />
     <SUITE FILE_PATH="coverage/Estacionamento@Unnamed.rcov" NAME="Unnamed Coverage Results" MODIFIED="1679519706253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Estacionamento" />
   </component>
 </project>

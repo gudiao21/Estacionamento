@@ -2,17 +2,17 @@ require 'time'
 require 'byebug'
 require 'json'
 require 'pg'
-#require 'database.rb'
+require 'term/ansicolor'
+require 'pastel'
+require_relative 'database'
 
-conn = PG.connect(
-  dbname: "estacionamento",
-  user: "postgres",
-  password: "Joacira",
-  host: "localhost",
-  port: "5432"
-)
-#require 'term/ansicolor'
-#require 'pastel'
+# conn = PG.connect(
+#   dbname: "estacionamento",
+#   user: "postgres",
+#   password: "Joacira",
+#   host: "localhost",
+#   port: "5432"
+# )
 
 
 #debugger
@@ -35,10 +35,31 @@ class Veiculo
     ControleVeiculos.volta_menu
   end
   #dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : ""
+
+  def self.editar_veiculo #Receberá novos valores para o veículo.
+    print "Digite a placa do veículo que deseja editar: "
+    placa = gets.chomp
+    print "Digite o novo nome do veículo: "
+    nome_veiculo = gets.chomp
+    print "Digite o novo nome do dono do veículo: "
+    dono_do_veiculo = gets.chomp
+    print "Digite a nova hora de entrada do veículo: "
+    hora_entrada_str = gets.to_s.chomp
+    hora_entrada = Time.parse(hora_entrada_str).strftime("%Y-%m-%d %H:%M:%S")
+
+    # Chama o método de edição do veículo
+    Database.edit_veiculo(placa, nome_veiculo, dono_do_veiculo, hora_entrada)
+
+    # Exibe uma mensagem de sucesso
+    puts "Veículo editado com sucesso!"
+
+    ControleVeiculos.volta_menu
+  end
+
 end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
-  SAIR_DO_SISTEMA = 5
+  SAIR_DO_SISTEMA = 6
 
   @@veiculos = {}
 
@@ -66,9 +87,40 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     puts "Digite (2) para cadastrar saída do veículo."
     puts "Digite (3) para buscar veículo por placa."
     puts "Digite (4) para mostrar movimentação do dia."
-    puts "Digite (5) para sair."
+    puts "Digite (5) para gerenciar o BD do PostgreSQL."
+    puts "Digite (6) para sair."
     puts "====================================================="
     ControleVeiculos.captura_item_menu
+  end
+
+  def self.menu_postgre
+    system 'clear'
+    puts "\nO que deseja fazer?\n\n"
+    puts "Digite (1) para deletar um registro no postgre."
+    puts "Digite (2) para relatório corrente de veículos."
+    puts "Digite (3) para editar um registro de um veículo."
+    ControleVeiculos.captura_item_menu_postgre
+    ControleVeiculos.volta_menu
+  end
+
+  def self.captura_item_menu_postgre
+    opcao = gets.to_i
+    case opcao
+    when 1
+      system 'clear'
+      print "Digite a placa do veículo a ser deletado: "
+      placa = gets.chomp
+      #chamada do método para deletar o veículo
+      Database.delete_veiculo(placa)
+    when 2
+      system 'clear'
+      Database.relatorio_veiculos
+      ControleVeiculos.volta_menu
+    when 3
+      system 'clear'
+      Veiculo.editar_veiculo
+    end
+
   end
 
   def self.captura_item_menu
@@ -82,6 +134,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       ControleVeiculos.buscar_veiculo
     when 4
       ControleVeiculos.relatorio
+    when 5
+      ControleVeiculos.menu_postgre
     when SAIR_DO_SISTEMA
       SAIR_DO_SISTEMA
     else
@@ -125,17 +179,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     @novo_veiculo[:dono_do_veiculo] = dono_do_veiculo
     #debugger
     print "Digite a hora de entrada do veículo (formato: HH:MM): "
-    hora_entrada = gets.to_s.strip.chomp
-    until (hora_entrada).match?(/^\d{2}:\d{2}$/)
+    hora_entrada = Time.parse(gets.to_s.strip.chomp)
+    until hora_entrada.strftime('%H:%M') =~ /^\d{2}:\d{2}$/
       print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
-      hora_entrada = gets.to_s.strip.chomp
-      hora_entrada_objeto = Time.strptime(hora_entrada, "%H:%M") #convertido para o D
-
-      # agora você pode inserir hora_entrada_objeto no seu comando SQL
-
+      hora_entrada = Time.parse(gets.to_s.strip.chomp)
     end
+    #hora_entrada_str = hora_entrada.strftime("%Y-%m-%d %H:%M:%S")
     #debugger
-    @novo_veiculo[:hora_entrada] = Time.parse(hora_entrada)
+    @novo_veiculo[:hora_entrada] = (hora_entrada)
     #@@veiculos[placa][:hora_entrada] = hora_entrada
     begin
       #@novo_veiculo[:hora_entrada] = DateTime.parse(hora_entrada).to_time
@@ -145,30 +196,8 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       retry
     end
 
-    begin
-      # Conexão com o banco de dados
-      conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: '5432')
-
-      # Query SQL para inserir um novo registro na tabela controle_veiculos
-      conn.exec("INSERT INTO estacionamento.controle_veiculos(placa, nome_veiculo, dono_do_veiculo, hora_entrada) VALUES ('#{placa}', '#{nome_veiculo}', '#{dono_do_veiculo}', '#{hora_entrada_objeto}');")
-
-      puts "==================================================="
-
-      # Seleciona todos os registros da tabela controle_veiculos
-      result = conn.exec("SELECT * FROM estacionamento.controle_veiculos")
-
-      # Imprime os resultados no console
-      result.each do |row|
-        puts row
-      end
-      puts "===================================================="
-
-      # Fechando a conexão
-      conn.close
-
-    rescue PG::Error => e
-      puts 'Erro ao inserir o registro na tabela controle_veiculos: ' + e.message
-    end
+    #Chamada para o método de insert no arquivo "database.rb".
+    Database.inserir_veiculo(placa, nome_veiculo, dono_do_veiculo, hora_entrada)
 
     @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
     puts "+==========================================+"
@@ -182,10 +211,14 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     #debugger
     system 'clear'
     puts "\n|----- Voce escolheu a opção: (2)CADASTRAR SAÍDA DO VEÍCULO -----|\n\n"
+
+    debugger
     print "Digite a placa do veiculo: "
     placa = gets.to_s.strip
     #debugger
-
+    print "Digite a hora de saída do veículo (formato: HH:MM): "
+    hora_saida_str = gets.chomp
+    hora_saida = Time.parse(hora_saida_str).strftime("%Y-%m-%d %H:%M:%S")
     #debugger
     if @@veiculos.key?(placa) && @@veiculos[placa][:hora_saida].nil?
       #debugger
@@ -193,11 +226,9 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       hora_saida = nil
 
       print "Digite a hora de saída do veículo (formato: HH:MM): "
-      hora_saida = gets.to_s.strip.chomp
-      until (hora_saida).match?(/^\d{2}:\d{2}$/)
-        print "Hora de saída inválida, digite novamente (formato: HH:MM): "
-        hora_saida = gets.to_s.strip.chomp
-      end
+      hora_saida_str = gets.chomp
+      hora_saida = Time.parse(hora_saida_str).strftime("%Y-%m-%d %H:%M:%S")
+
       begin
         @novo_veiculo[:hora_saida] = DateTime.parse(hora_saida).to_time
 
@@ -206,16 +237,19 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         retry
       end
 
-      conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
-      conn.prepare('insert_statement', 'INSERT INTO estacionamento (placa, nome_veiculo, dono_do_veiculo, hora_entrada) VALUES ($1, $2, $3, $4)')
-      conn.prepare('select_statement', 'SELECT * FROM estacionamento')
-      result = conn.exec_prepared('select_statement')
+     Database.registrar_saida(placa, hora_saida)
 
-      puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
-      result.each do |row|
-        puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
-      end
-      puts "+-----------------------------------------------------------------+"
+      # conn = PG.connect(dbname: 'estacionamento', user: 'postgres', password: 'Joacira', host: 'localhost', port: 5432)
+      # conn.prepare('insert_statement', 'INSERT INTO estacionamento (placa, nome_veiculo, dono_do_veiculo, hora_entrada) VALUES ($1, $2, $3, $4)')
+      # conn.prepare('select_statement', 'SELECT * FROM estacionamento')
+      # result = conn.exec_prepared('select_statement')
+      #
+      # puts "\n+---|confirmação de cadastro no banco de dados do postgresql|---+"
+      # result.each do |row|
+      #   puts "Placa: #{row['placa']}, Nome do veículo: #{row['nome_veiculo']}, Dono do veículo: #{row['dono_do_veiculo']}, Hora de entrada: #{row['hora_entrada']}"
+      # end
+      # puts "+-----------------------------------------------------------------+"
+
       #debugger
       @@veiculos[placa][:hora_saida] = hora_saida #Corrigido 07/03/23, estava @@veiculos[:placa] ...
       puts "+==========================================+"
