@@ -33,16 +33,7 @@ class Veiculo
 end
 
 class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
-  SAIR_DO_SISTEMA = 8
-
-  def initialize
-    @veiculos = {}
-    @novo_veiculo = {}
-  end
-
-  def self.veiculos
-    @@veiculos
-  end
+  SAIR_DO_SISTEMA = 7
 
   def self.menu
     system 'clear'
@@ -63,21 +54,18 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     opcao = gets.to_i
     case opcao
     when 1
-      ControleVeiculos.cadastrar_entrada
+      Database.inserir_veiculo
     when 2
       ControleVeiculos.cadastrar_saida
     when 3
       ControleVeiculos.buscar_veiculo
     when 4
       Database.relatorio_veiculos
+      ControleVeiculos.volta_menu
     when 5
-      Database.delete_veiculo
+      Database.delete_veiculo_pela_placa
+      ControleVeiculos.volta_menu
     when 6
-      print "Digite a placa do veículo a ser deletado: "
-      placa = gets.chomp
-      #chamada do método para deletar o veículo
-      Database.delete_veiculo(placa)
-    when 7
       Veiculo.editar_veiculo
     when SAIR_DO_SISTEMA
       SAIR_DO_SISTEMA
@@ -86,68 +74,6 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
       ControleVeiculos.pausa
       ControleVeiculos.menu
     end
-  end
-
-  def self.cadastrar_entrada
-    #debugger
-    system 'clear'
-    puts "\n|----- Voce escolheu a opção: (1)CADASTRAR ENTRADA DO VEÍCULO -----|\n\n"
-    @novo_veiculo = {}
-
-    placa = ""
-    print "Digite a placa do veículo: "
-    while (placa = gets.to_s.strip).empty?
-      system 'clear'
-      print "A placa do veículo não pode ser vazia, digite novamente: "
-    end
-
-    if @@veiculos.has_key?(placa)
-      puts "Essa placa (#{placa}) já foi cadastrada!"
-      ControleVeiculos.volta_menu
-    else
-      @@veiculos[:total_a_pagar] ? ("%.2f" % @@veiculos[:total_a_pagar]) : ""
-      @novo_veiculo[:placa] = placa
-    end
-
-    print "Digite o nome do veículo: "
-    while (nome_veiculo = gets.to_s.strip).empty?
-      print "Nome do veículo não pode ser vazio, digite novamente: "
-    end
-    @novo_veiculo[:nome_veiculo] = nome_veiculo
-
-    print "Digite o nome do proprietário do veículo: "
-    while (dono_do_veiculo = gets.to_s.strip).empty?
-      print "Nome do dono do veículo não pode ser vazio, digite novamente: "
-    end
-    @novo_veiculo[:dono_do_veiculo] = dono_do_veiculo
-    #debugger
-    print "Digite a hora de entrada do veículo (formato: HH:MM): "
-    hora_entrada = Time.parse(gets.to_s.strip.chomp)
-    until hora_entrada.strftime('%H:%M') =~ /^\d{2}:\d{2}$/
-      print "Hora de entrada inválida, digite novamente (formato: HH:MM): "
-      hora_entrada = Time.parse(gets.to_s.strip.chomp)
-    end
-    #hora_entrada_str = hora_entrada.strftime("%Y-%m-%d %H:%M:%S")
-    #debugger
-    @novo_veiculo[:hora_entrada] = (hora_entrada)
-    #@@veiculos[placa][:hora_entrada] = hora_entrada
-    begin
-      #@novo_veiculo[:hora_entrada] = DateTime.parse(hora_entrada).to_time
-
-    rescue ArgumentError
-      print "Hora de entrada inválida, tente novamente: "
-      retry
-    end
-
-    #Chamada para o método de insert no arquivo "database.rb".
-    Database.inserir_veiculo(placa, nome_veiculo, dono_do_veiculo, hora_entrada)
-
-    @@veiculos[@novo_veiculo[:placa]]= @novo_veiculo
-    puts "+==========================================+"
-    puts "|      VEÍCULO CADASTRADO COM SUCESSO.     |"
-    puts "+==========================================+"
-    #ControleVeiculos.objeto_json
-    ControleVeiculos.volta_menu
   end
 
   def self.cadastrar_saida
@@ -169,21 +95,13 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
     end
     hora_saida = Time.parse(hora_saida_str).strftime("%Y-%m-%d %H:%M:%S")
 
-
-
-     Database.registrar_saida(placa, hora_saida)
-
-
+    Database.registrar_saida(placa, hora_saida)
+    ControleVeiculos.volta_menu
   end
 
   def self.buscar_veiculo
-     system 'clear'
-     puts "\n|----- Voce escolheu a opção: (3)BUSCAR VEÍCULO POR PLACA -----|\n\n"
-  #   #debugger
-     print "Digite a placa do veículo: "
-     placa = gets.strip
-     Database.buscar_veiculo(placa)
-
+     Database.buscar_veiculo
+     ControleVeiculos.volta_menu
   end
 
   def self.calculo(placa, hora_entrada, hora_saida)
