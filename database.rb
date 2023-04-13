@@ -29,7 +29,7 @@ class Database
       puts "Hora de saída: #{result[0]['hora_saida']}"
       puts "Total a pagar: R$ #{result[0]['total_a_pagar']}"
       puts "+--------------------------------------------------------+"
-      puts "|Confirma exclusão do veículo com placa #{placa}? (S/N)  |"
+      puts "|Confirma exclusão do veículo com placa #{placa}? (S/N)        |"
       puts "+--------------------------------------------------------+"
       confirmacao = gets.chomp.downcase
       if confirmacao == "s"
