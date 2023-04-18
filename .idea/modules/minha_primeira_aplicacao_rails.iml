@@ -9,6 +9,9 @@
       </configuration>
     </facet>
   </component>
+  <component name="ModuleRunConfigurationManager">
+    <shared />
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../../minha_primeira_aplicacao_rails">
       <sourceFolder url="file://$MODULE_DIR$/../../minha_primeira_aplicacao_rails/features" isTestSource="true" />
