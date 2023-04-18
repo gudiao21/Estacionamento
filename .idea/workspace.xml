@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/minha_primeira_aplicacao_rails.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/minha_primeira_aplicacao_rails.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -360,7 +357,7 @@
       <workItem from="1681420090560" duration="6567000" />
       <workItem from="1681460708822" duration="6674000" />
       <workItem from="1681761920168" duration="12192000" />
-      <workItem from="1681804146616" duration="2100000" />
+      <workItem from="1681804146616" duration="3645000" />
     </task>
     <servers />
   </component>
