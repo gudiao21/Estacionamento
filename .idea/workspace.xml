@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="" />
+    <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/carros_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/pages_controller.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/helpers/carros_helper.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/helpers/pages_helper.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/models/carro.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/_carro.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/_carro.json.jbuilder" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/_form.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/edit.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/index.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/index.json.jbuilder" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/new.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/show.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/carros/show.json.jbuilder" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/pages/index.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/db/migrate/20230419124746_create_carros.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/controllers/carros_controller_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/controllers/pages_controller_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/fixtures/carros.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/minha_primeira_aplicacao_rails.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/minha_primeira_aplicacao_rails.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +81,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/estacionamento.rb" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -357,7 +392,10 @@
       <workItem from="1681420090560" duration="6567000" />
       <workItem from="1681460708822" duration="6674000" />
       <workItem from="1681761920168" duration="12192000" />
-      <workItem from="1681804146616" duration="5169000" />
+      <workItem from="1681804146616" duration="10762000" />
+      <workItem from="1681843904185" duration="6619000" />
+      <workItem from="1681905603255" duration="1258000" />
+      <workItem from="1681906872349" duration="7233000" />
     </task>
     <servers />
   </component>
@@ -383,6 +421,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Estacionamento@estacionamento.rcov" NAME="estacionamento Coverage Results" MODIFIED="1681161964494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Estacionamento" />
+    <SUITE FILE_PATH="coverage/Estacionamento@Development__minha_primeira_aplicacao_rails.rcov" NAME="Development: minha_primeira_aplicacao_rails Coverage Results" MODIFIED="1681906445809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/minha_primeira_aplicacao_rails" MODULE_NAME="minha_primeira_aplicacao_rails" />
     <SUITE FILE_PATH="coverage/Estacionamento@Unnamed.rcov" NAME="Unnamed Coverage Results" MODIFIED="1679519706253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Estacionamento" />
   </component>
 </project>

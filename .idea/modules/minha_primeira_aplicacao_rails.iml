@@ -101,6 +101,10 @@
     <orderEntry type="library" scope="PROVIDED" name="xpath (v3.2.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.6.7, RVM: ruby-3.0.0) [gem]" level="application" />
   </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="0" />
+    <I18N_FOLDERS number="1" string0="$MODULE_DIR$/../../minha_primeira_aplicacao_rails/config/locales" />
+  </component>
   <component name="RailsGeneratorsCache">
     <option name="generators">
       <list>
