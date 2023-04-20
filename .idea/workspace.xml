@@ -26,7 +26,8 @@
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/fixtures/carros.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estacionamento.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" afterDir="false" />
@@ -78,7 +79,13 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Gemfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Gemfile.lock" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/database.rb" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/estacionamento.rb" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/pages/index.html.erb" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -393,7 +400,7 @@
       <workItem from="1681804146616" duration="10762000" />
       <workItem from="1681843904185" duration="6619000" />
       <workItem from="1681905603255" duration="1258000" />
-      <workItem from="1681906872349" duration="13314000" />
+      <workItem from="1681906872349" duration="13600000" />
     </task>
     <servers />
   </component>
