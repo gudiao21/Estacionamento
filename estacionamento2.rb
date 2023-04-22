@@ -28,7 +28,7 @@ class ControleVeiculos
     print "Entre com o horário de entrada do veículo: "
     cadastroveiculo = CadastroVeiculo.new
     cadastroveiculo.hora_entrada = gets.chomp
-    @@veiculos < Carro
+    @@veiculos[carro.placa] = {carro: carro, cadastroveiculo: cadastroveiculo}
   end
 
   def self.cadastrar_saida
@@ -39,7 +39,7 @@ class ControleVeiculos
     print "Digite a hora de saída do veículo: "
     cadastroveiculo = CadastroVeiculo.new
     cadastroveiculo.hora_saida = gets.chomp
-    @@veiculos < carro
+    @@veiculos[placa][:cadastroveiculo].hora_saida = hora_saida
   end
 
   def self.calculo

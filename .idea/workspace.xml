@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/carros_controller.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/pages_controller.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/helpers/carros_helper.rb" afterDir="false" />
@@ -407,7 +406,7 @@
       <workItem from="1682026812705" duration="3811000" />
       <workItem from="1682030652830" duration="6866000" />
       <workItem from="1682063824315" duration="5477000" />
-      <workItem from="1682164549867" duration="14430000" />
+      <workItem from="1682164549867" duration="16352000" />
     </task>
     <servers />
   </component>
