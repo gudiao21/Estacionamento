@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74818844-6a50-453b-8fdd-2c491de5bdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/estacionamento2.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/carros_controller.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/controllers/pages_controller.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/helpers/carros_helper.rb" afterDir="false" />
@@ -28,7 +28,7 @@
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Estacionamento" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/estacionamento2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento2.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" afterDir="false" />
@@ -407,7 +407,7 @@
       <workItem from="1682026812705" duration="3811000" />
       <workItem from="1682030652830" duration="6866000" />
       <workItem from="1682063824315" duration="5477000" />
-      <workItem from="1682164549867" duration="10001000" />
+      <workItem from="1682164549867" duration="14430000" />
     </task>
     <servers />
   </component>
