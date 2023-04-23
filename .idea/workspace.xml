@@ -27,6 +27,7 @@
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Estacionamento" beforeDir="false" afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento2.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" afterDir="false" />
@@ -407,7 +408,7 @@
       <workItem from="1682030652830" duration="6866000" />
       <workItem from="1682063824315" duration="5477000" />
       <workItem from="1682164549867" duration="26563000" />
-      <workItem from="1682274099206" duration="973000" />
+      <workItem from="1682274099206" duration="3007000" />
     </task>
     <servers />
   </component>

@@ -14,6 +14,56 @@ end
 #   attr_accessor :hora_entrada, :hora_saida, :total_a_pagar_por_veiculo
 # end
 
+class CadastramentoVeiculo
+  SAIR_DO_SISTEMA = 7
+
+  def self.menu
+    system 'clear'
+    puts "\nO que deseja fazer?\n\n"
+    puts "Digite (1) para cadastrar entrada do veículo."
+    puts "Digite (2) para cadastrar saída do veículo."
+    puts "Digite (3) para buscar veículo por placa."
+    puts "Digite (4) para relatório do dia."
+    puts "Digite (5) para deletar um registro no postgre."
+    puts "Digite (6) editar um registro de um veículo"
+    puts "Digite (7) para sair."
+    puts "====================================================="
+    CadastramentoVeiculo.captura_item_menu
+  end
+
+  def captura_item_menu
+    opcao = gets.to_i
+    case opcao
+    when 1
+      ControleVeiculos.cadastrar_entrada
+    when 2
+      ControleVeiculos.cadastrar_saida
+    when 3
+      ControleVeiculos.buscar_veiculo
+    when 4
+      ControleVeiculos.volta_menu
+    when 5
+      ControleVeiculos.volta_menu
+    when 6
+      Veiculo.editar_veiculo
+    when SAIR_DO_SISTEMA
+      SAIR_DO_SISTEMA
+    else
+      puts "Você tem que digitar um número entre 1 a 5 apenas, por favor!"
+      CadastroVeiculos.pausa
+      CadastroVeiculos.menu
+    end
+  end
+
+    def self.init
+      while(true)
+        choice = CadastramentoVeiculo.menu
+        break if choice == SAIR_DO_SISTEMA
+      end
+    end
+
+end
+
 class ControleVeiculos
   @@veiculos = {}
   def self.cadastrar_entrada
@@ -67,6 +117,4 @@ class ControleVeiculos
   end
 end
 
-ControleVeiculos.cadastrar_entrada
-ControleVeiculos.cadastrar_saida
-ControleVeiculos.calcular_subtotal
+CadastramentoVeiculo.init
