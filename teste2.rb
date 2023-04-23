@@ -234,7 +234,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         ControleVeiculos.calcular_subtotal
         # Percorre todos os veículos e os imprime formatados:
         @@veiculos.each do |placa, dados|
-        # Substitui valores nulos ou vazios por uma string vazia:    
+        # Substitui valores nulos ou vazios por uma string vazia:
         placa = placa.nil? ? "" : placa
         nome_veiculo = dados[:nome_veiculo].nil? ? "" : dados[:nome_veiculo]
         dono_do_veiculo = dados[:dono_do_veiculo].nil? ? "" : dados[:dono_do_veiculo]
