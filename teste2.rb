@@ -265,6 +265,7 @@ class ControleVeiculos #Sempre no padrão de codificação "Pascal Case".
         @@veiculos.each do |placa, dados|
         subtotal += dados[:total_a_pagar] || 0
         @@veiculos[placa][:subtotal] = subtotal
+        debugger
         end
    end
       

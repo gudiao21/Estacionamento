@@ -7,7 +7,7 @@ require 'pastel'
 require_relative 'database'
 
 class Carro
-  attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida, :total_a_pagar_por_veiculo, :subtotal
+  attr_accessor :placa, :nome_veiculo, :dono_do_veiculo, :hora_entrada, :hora_saida, :total_a_pagar_por_veiculo, :subtotais_acumulado
 end
 
 class CadastramentoVeiculo
@@ -37,9 +37,9 @@ class CadastramentoVeiculo
     when 3
       ControleVeiculos.buscar_veiculo
     when 4
-      ControleVeiculos.relatorio
+      ControleVeiculos.gerar_relatorio
     when 5
-      CadastramentoVeiculo.volta_menu
+      ControleVeiculos.deletar
     when 6
       Veiculo.editar_veiculo
     when SAIR_DO_SISTEMA
@@ -94,13 +94,14 @@ class CadastramentoVeiculo
       puts "Total a pagar foi de #{sprintf('%.2f' , total_a_pagar_por_veiculo)}."
       puts "=================================================="
     end
-    CadastramentoVeiculo.volta_menu
+    #CadastramentoVeiculo.volta_menu
   end
 
 end
 
 class ControleVeiculos
   @@veiculos = {}
+
   def self.cadastrar_entrada
     system 'clear'
     carro = Carro.new
@@ -141,11 +142,14 @@ class ControleVeiculos
     puts "+====================================+"
   end
 
-  def self.calcular_subtotal
-    subtotal = 0
-    @@veiculos.each do |placa, dados|
-    subtotal += dados[:total_a_pagar_por_veiculo] || 0
-    @@veiculos[placa][:carro].subtotal = subtotal
+  def self.calcular_subtotal_acumulado
+    subtotais_acumulado = 0
+    @@veiculos.each do |key, value|
+      placa = key
+      carro = value[:carro]
+      subtotais_acumulado += carro.total_a_pagar_por_veiculo || 0
+      @@veiculos[placa][:carro].subtotais_acumulado = subtotais_acumulado
+      #debugger
     end
   end
 
@@ -164,39 +168,67 @@ class ControleVeiculos
     CadastramentoVeiculo.volta_menu
   end
 
-  def self.relatorio
+  def self.gerar_relatorio
     system 'clear'
+    #debugger
     # Define as larguras máximas de cada coluna
     placa_width = 5
     nome_veiculo_width = 20
     dono_do_veiculo_width = 20
     hora_entrada_width = 32
     hora_saida_width = 32
-    total_a_pagar_width = 14
-    subtotais = 50
+    total_a_pagar_por_veiculo_width = 25
+    subtotais_acumulado = 14
 
     # Cria a string de formatação
-    format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_width}s  %-#{subtotais}s\n"
+    format_string = "%-#{placa_width}s  %-#{nome_veiculo_width}s  %-#{dono_do_veiculo_width}s  %-#{hora_entrada_width}s  %-#{hora_saida_width}s  %-#{total_a_pagar_por_veiculo_width}s  %-#{subtotais_acumulado}s\n"
 
     # Imprime o cabeçalho
-    puts "====================================================================================================================================================="
-    puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar", "Subtotais"]
-    puts "====================================================================================================================================================="
-    ControleVeiculos.calcular_subtotal
+    puts "======================================================================================================================================================================"
+    puts format_string % ["Placa", "Nome do Veículo", "Dono do Veículo", "Hora de Entrada", "Hora de Saída", "Total a Pagar por veículo", "Subtotais acumulados"]
+    puts "======================================================================================================================================================================"
+    ControleVeiculos.calcular_subtotal_acumulado
     # Percorre todos os veículos e os imprime formatados:
-    @@veiculos.each do |placa, dados|
-      # Substitui valores nulos ou vazios por uma string vazia:
-      placa = placa.nil? ? "" : placa
-      nome_veiculo = dados[:nome_veiculo].nil? ? "" : dados[:nome_veiculo]
-      dono_do_veiculo = dados[:dono_do_veiculo].nil? ? "" : dados[:dono_do_veiculo]
-      hora_entrada = dados[:hora_entrada].nil? ? "" : dados[:hora_entrada]
-      hora_saida = dados[:hora_saida].nil? ? "" : dados[:hora_saida]
-      total_a_pagar = dados[:total_a_pagar].nil? ? "" : "%.2f" % dados[:total_a_pagar]
-      subtotal = dados[:subtotal].nil? ? "" : "%.2f" % dados[:subtotal]
-      printf(format_string, placa, dados[:nome_veiculo], dados[:dono_do_veiculo], dados[:hora_entrada], dados[:hora_saida], dados[:total_a_pagar] ? ("%.2f" % dados[:total_a_pagar]) : 0, dados[:subtotal] ? ("%.2f" % dados[:subtotal]) : 0)
+    @@veiculos.each do |key, value|
+      carro = value[:carro]
+      placa = carro.placa
+      nome_veiculo = carro.nome_veiculo
+      dono_do_veiculo = carro.dono_do_veiculo
+      hora_entrada = carro.hora_entrada
+      hora_saida = carro.hora_saida
+      total_a_pagar_por_veiculo = "%.2f" % carro.total_a_pagar_por_veiculo
+      subtotais_acumulado_str = "%.2f" % carro.subtotais_acumulado
+
+      puts format_string % [placa, nome_veiculo, dono_do_veiculo, hora_entrada, hora_saida, total_a_pagar_por_veiculo, subtotais_acumulado_str]
+      #debugger
     end
+
+    puts "======================================================================================================================================================================"
     CadastramentoVeiculo.volta_menu
   end
+
+  def self.deletar
+    system 'clear'
+    puts "+-------------------------------------------------------------+"
+    puts "|Você escolheu a opção (5) para deletar um registro de veículo:|"
+    puts "+-------------------------------------------------------------+"
+    print "Entre com a placa do registro que você quer excluir: "
+    placa = gets.chomp
+    CadastramentoVeiculo.mostrar_entrada_saida(placa, @@veiculos[placa][:carro].nome_veiculo, @@veiculos[placa][:carro].dono_do_veiculo, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida, @@veiculos[placa][:carro].total_a_pagar_por_veiculo)
+    puts "Tem certeza que deseja excluir o registro acima? (S/N)."
+    escolha = gets.upcase.chomp
+    if escolha == "N"
+      CadastramentoVeiculo.menu
+    elsif escolha == "S"
+      @@veiculos.delete(placa)
+    else
+      while escolha != "N" && "S"
+        puts "Só é admitido nessa etapa os valores (N) ou (S)."
+      end
+    end
+
+  end
+
 end
 
 CadastramentoVeiculo.init
