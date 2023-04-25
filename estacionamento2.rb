@@ -222,8 +222,9 @@ class ControleVeiculos
     elsif escolha == "S"
       @@veiculos.delete(placa)
     else
-      while escolha != "N" && "S"
+      while escolha != "N" && escolha != "S"
         puts "Só é admitido nessa etapa os valores (N) ou (S)."
+        escolha= gets.upcase.chomp
       end
     end
 

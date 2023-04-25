@@ -26,7 +26,6 @@
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/fixtures/carros.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.byebug_history" beforeDir="false" afterPath="$PROJECT_DIR$/.byebug_history" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Estacionamento" beforeDir="false" afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento2.rb" afterDir="false" />
@@ -34,7 +33,6 @@
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/app/views/layouts/application.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/database.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teste2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/teste2.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -419,7 +417,7 @@
       <workItem from="1682164549867" duration="26563000" />
       <workItem from="1682274099206" duration="13996000" />
       <workItem from="1682288113197" duration="972000" />
-      <workItem from="1682340774416" duration="19402000" />
+      <workItem from="1682340774416" duration="20689000" />
     </task>
     <servers />
   </component>
