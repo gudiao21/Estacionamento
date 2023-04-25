@@ -16,12 +16,12 @@ class CadastramentoVeiculo
   def self.menu
     system 'clear'
     puts "\nO que deseja fazer?\n\n"
-    puts "Digite (1) para cadastrar entrada do veículo."
-    puts "Digite (2) para cadastrar saída do veículo."
-    puts "Digite (3) para buscar veículo por placa."
-    puts "Digite (4) para relatório corrente."
-    puts "Digite (5) para deletar um registro de veículo."
-    puts "Digite (6) editar um registro de um veículo"
+    puts "Digite (1) para cadastrar a entrada do veículo."
+    puts "Digite (2) para cadastrar a saída do veículo."
+    puts "Digite (3) para buscar o veículo por placa."
+    puts "Digite (4) para gerar um relatório corrente."
+    puts "Digite (5) para deletar um registro de um veículo."
+    puts "Digite (6) para editar um registro de um veículo"
     puts "Digite (7) para sair."
     puts "====================================================="
     CadastramentoVeiculo.captura_item_menu
@@ -107,7 +107,7 @@ class ControleVeiculos
     carro = Carro.new
     puts "+-----------------------------------------------------------+"
     puts "|Você escolheu a opção (1) para Cadastrar entrada do veículo|"
-    puts "+-----------------------------------------------------------+"
+    puts "+-----------------------------------------------------------+\n\n"
     print "Entre com a placa do veículo: "
     carro.placa = gets.chomp
     print "Entre com o nome do veículo: "
@@ -123,7 +123,9 @@ class ControleVeiculos
   def self.cadastrar_saida
     system 'clear'
     carro = Carro.new
-    puts "Voce escolheu a opção (2) para "
+    puts "+-----------------------------------------------------------+"
+    puts "|Você escolheu a opção (2) para cadastrar a saída do veículo|"
+    puts "+-----------------------------------------------------------+\n\n"
     print "Digite a placa do veículo: "
     carro.placa = gets.chomp
     print "Digite a hora de saída do veículo: "
@@ -159,7 +161,9 @@ class ControleVeiculos
 
   def self.buscar_veiculo
     system 'clear'
-    puts "\n|----- Voce escolheu a opção: (3)BUSCAR VEÍCULO POR PLACA -----|\n\n"
+    puts "+---------------------------------------------------------+"
+    puts "|Você escolheu a opção (3) para buscar o veículo por placa|"
+    puts "+---------------------------------------------------------+\n\n"
     print "Digite a placa do veículo: "
     placa = gets.strip
     if @@veiculos.key?(placa) #Se "placa" já estiver sendo usada como chave em @@veiculos, o que indica que um veículo com essa placa já foi cadastrado.
@@ -174,6 +178,9 @@ class ControleVeiculos
 
   def self.gerar_relatorio
     system 'clear'
+    puts "+---------------------------------------------------------+"
+    puts "|Você digitou a opção (4) para gerar um relatório corrente|"
+    puts "+---------------------------------------------------------+"
     #debugger
     # Define as larguras máximas de cada coluna
     placa_width = 5
@@ -214,8 +221,8 @@ class ControleVeiculos
   def self.deletar
     system 'clear'
     puts "+-------------------------------------------------------------+"
-    puts "|Você escolheu a opção (5) para deletar um registro de veículo:|"
-    puts "+-------------------------------------------------------------+"
+    puts "|Você escolheu a opção (5) para deletar um registro de veículo|"
+    puts "+-------------------------------------------------------------+\n\n"
     print "Entre com a placa do registro que você quer excluir: "
     placa = gets.chomp
     CadastramentoVeiculo.mostrar_entrada_saida(placa, @@veiculos[placa][:carro].nome_veiculo, @@veiculos[placa][:carro].dono_do_veiculo, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida, @@veiculos[placa][:carro].total_a_pagar_por_veiculo)
@@ -233,9 +240,9 @@ class ControleVeiculos
     end
   end
     def self.editar_veiculo
-      puts "+--------------------------------------------------------+"
-      puts "|Você escolheu a opção (6) Editar um registro de veículo.|"
-      puts "+--------------------------------------------------------+"
+      puts "+-------------------------------------------------------------+"
+      puts "|Você escolheu a opção (6) para editar um registro de veículo.|"
+      puts "+-------------------------------------------------------------+\n\n"
       print "Digite o número da placa do carro que você quer editar: "
       placa = gets.chomp
       #debugger
