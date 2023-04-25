@@ -105,6 +105,9 @@ class ControleVeiculos
   def self.cadastrar_entrada
     system 'clear'
     carro = Carro.new
+    puts "+-----------------------------------------------------------+"
+    puts "|Você escolheu a opção (1) para Cadastrar entrada do veículo|"
+    puts "+-----------------------------------------------------------+"
     print "Entre com a placa do veículo: "
     carro.placa = gets.chomp
     print "Entre com o nome do veículo: "
@@ -120,6 +123,7 @@ class ControleVeiculos
   def self.cadastrar_saida
     system 'clear'
     carro = Carro.new
+    puts "Voce escolheu a opção (2) para "
     print "Digite a placa do veículo: "
     carro.placa = gets.chomp
     print "Digite a hora de saída do veículo: "
@@ -229,21 +233,31 @@ class ControleVeiculos
     end
   end
     def self.editar_veiculo
+      puts "+--------------------------------------------------------+"
+      puts "|Você escolheu a opção (6) Editar um registro de veículo.|"
+      puts "+--------------------------------------------------------+"
       print "Digite o número da placa do carro que você quer editar: "
       placa = gets.chomp
-      debugger
-      CadastramentoVeiculo.mostrar_entrada_saida(placa, @@veiculos[placa][:carro].nome_veiculo, @@veiculos[placa][:carro].dono_do_veiculo, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida, @@veiculos[placa][:carro].total_a_pagar_por_veiculo))
+      #debugger
+      CadastramentoVeiculo.mostrar_entrada_saida(placa, @@veiculos[placa][:carro].nome_veiculo, @@veiculos[placa][:carro].dono_do_veiculo, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida, @@veiculos[placa][:carro].total_a_pagar_por_veiculo)
       puts "Tem certeza que deseja editar o registro acima? (S/N)."
       escolha = gets.upcase.chomp
       if escolha == "N"
         CadastramentoVeiculo.menu
       elsif escolha == "S"
+        system 'clear'
         print "Mantenha ou digite a nova placa do veículo: "
-        @@veiculos.[placa][:carro].placa = gets.chomp
+        @@veiculos[placa][:carro].placa = gets.chomp
         print "Mantenha ou digite o novo nome do veículo: "
-        @@veiculos.[placa][:carro].nome_veiculo = gets.chomp
-        print "Mantenha ou digite o novo nome do veículo: "
-        @@veiculos.[placa][:carro]
+        @@veiculos[placa][:carro].nome_veiculo = gets.chomp
+        print "Mantenha ou digite o novo nome do dono do veículo: "
+        @@veiculos[placa][:carro].dono_do_veiculo = gets.chomp
+        print "Mantenha ou digite a nova hora da entrada do veículo: "
+        @@veiculos[placa][:carro].hora_entrada = gets.chomp
+        print "Mantenha ou digite a nova hora de saída do veículo: "
+        @@veiculos[placa][:carro].hora_saida = gets.chomp
+        ControleVeiculos.calculo(placa, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida)
+
       else
         while escolha != "N" && escolha != "S"
           puts "Só é admitido nessa etapa os valores (N) ou (S)."

@@ -26,6 +26,7 @@
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/fixtures/carros.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/models/carro_test.rb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/minha_primeira_aplicacao_rails/test/system/carros_test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.byebug_history" beforeDir="false" afterPath="$PROJECT_DIR$/.byebug_history" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Estacionamento" beforeDir="false" afterPath="$PROJECT_DIR$/Estacionamento" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estacionamento2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/estacionamento2.rb" afterDir="false" />
@@ -419,7 +420,7 @@
       <workItem from="1682288113197" duration="972000" />
       <workItem from="1682340774416" duration="20689000" />
       <workItem from="1682382737180" duration="705000" />
-      <workItem from="1682423961467" duration="2265000" />
+      <workItem from="1682423961467" duration="4326000" />
     </task>
     <servers />
   </component>
