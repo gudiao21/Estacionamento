@@ -41,7 +41,7 @@ class CadastramentoVeiculo
     when 5
       ControleVeiculos.deletar
     when 6
-      Veiculo.editar_veiculo
+      ControleVeiculos.editar_veiculo
     when SAIR_DO_SISTEMA
       SAIR_DO_SISTEMA
     else
@@ -227,8 +227,31 @@ class ControleVeiculos
         escolha= gets.upcase.chomp
       end
     end
-
   end
+    def self.editar_veiculo
+      print "Digite o número da placa do carro que você quer editar: "
+      placa = gets.chomp
+      debugger
+      CadastramentoVeiculo.mostrar_entrada_saida(placa, @@veiculos[placa][:carro].nome_veiculo, @@veiculos[placa][:carro].dono_do_veiculo, @@veiculos[placa][:carro].hora_entrada, @@veiculos[placa][:carro].hora_saida, @@veiculos[placa][:carro].total_a_pagar_por_veiculo))
+      puts "Tem certeza que deseja editar o registro acima? (S/N)."
+      escolha = gets.upcase.chomp
+      if escolha == "N"
+        CadastramentoVeiculo.menu
+      elsif escolha == "S"
+        print "Mantenha ou digite a nova placa do veículo: "
+        @@veiculos.[placa][:carro].placa = gets.chomp
+        print "Mantenha ou digite o novo nome do veículo: "
+        @@veiculos.[placa][:carro].nome_veiculo = gets.chomp
+        print "Mantenha ou digite o novo nome do veículo: "
+        @@veiculos.[placa][:carro]
+      else
+        while escolha != "N" && escolha != "S"
+          puts "Só é admitido nessa etapa os valores (N) ou (S)."
+          escolha= gets.upcase.chomp
+        end
+      end
+
+    end
 
 end
 
